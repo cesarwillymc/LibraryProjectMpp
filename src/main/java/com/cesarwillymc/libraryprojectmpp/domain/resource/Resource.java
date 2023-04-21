@@ -10,9 +10,11 @@ public class Resource<T> {
 
     Resource(Exception e) {
         exception = Optional.of(e);
+        data = Optional.empty();
     }
 
     Resource(T da) {
+        exception = Optional.empty();
         data = Optional.of(da);
     }
 
@@ -24,7 +26,7 @@ public class Resource<T> {
         return new Resource<T>(exception);
     }
 
-    public  T getData() {
+    public T getData() {
         return (T) data.get();
     }
 
