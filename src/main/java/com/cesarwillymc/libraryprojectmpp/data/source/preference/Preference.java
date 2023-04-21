@@ -1,6 +1,6 @@
 package com.cesarwillymc.libraryprojectmpp.data.source.preference;
 
-import com.cesarwillymc.libraryprojectmpp.data.source.login.entity.EmployeeResponse;
+import com.cesarwillymc.libraryprojectmpp.data.source.login.entity.UserResponse;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.TypeAuth;
 
 import java.util.Optional;
@@ -8,9 +8,9 @@ import java.util.Optional;
 public enum Preference {
     TYPE_USER(null);
     private TypeAuth typeAuth;
-    private EmployeeResponse user;
+    private UserResponse user;
 
-    private Preference(EmployeeResponse user) {
+    private Preference(UserResponse user) {
         setUser(user);
     }
 
@@ -18,15 +18,15 @@ public enum Preference {
         return typeAuth;
     }
 
-    public EmployeeResponse getUser() {
+    public UserResponse getUser() {
         return user;
     }
 
-    public void setUser(EmployeeResponse user) {
+    public void setUser(UserResponse user) {
         Optional.ofNullable(user).ifPresentOrElse(
                 x -> {
                     this.user = user;
-                    this.typeAuth = user.authorization();
+                    this.typeAuth = user.getAuthorization();
                 },
                 () -> this.typeAuth = TypeAuth.NONE
         );

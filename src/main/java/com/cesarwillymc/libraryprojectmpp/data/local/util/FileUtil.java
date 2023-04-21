@@ -15,7 +15,7 @@ import java.util.StringJoiner;
 public class FileUtil {
     public static final String slashSeparator = FileSystems.getDefault().getSeparator();
     public static final String pathProject = new StringJoiner(slashSeparator, slashSeparator, "")
-            .add("Project4_Students").add("src").add("data/local").add("storage").toString();
+            .add("src").add("main").add("java").add("com").add("cesarwillymc").add("libraryprojectmpp").add("data").add("local").add("storage").toString();
     public static final String OUTPUT_DIR_PROJECT = System.getProperty("user.dir") + pathProject;
 
     public static <T> T readFromStorage(StorageType type) {

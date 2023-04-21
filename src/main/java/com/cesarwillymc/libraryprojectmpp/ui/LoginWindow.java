@@ -1,5 +1,5 @@
 package com.cesarwillymc.libraryprojectmpp.ui;
-
+/*
 import business.ControllerInterface;
 import domain.exception.LoginException;
 import business.SystemController;
@@ -34,8 +34,7 @@ public class LoginWindow extends Stage implements LibWindow {
 	public void clear() {
 		messageBar.setText("");
 	}
-	
-	/* This class is a singleton */
+
     private LoginWindow () {}
     
     public void init() { 
@@ -112,3 +111,4 @@ public class LoginWindow extends Stage implements LibWindow {
 	
 	
 }
+*/

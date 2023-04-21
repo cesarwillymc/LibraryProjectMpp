@@ -3,8 +3,6 @@ package com.cesarwillymc.libraryprojectmpp.ui;
 import java.util.Collections;
 import java.util.List;
 
-import business.ControllerInterface;
-import business.SystemController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -39,7 +37,7 @@ public class Start extends Application {
 	}
 	
 	private static Stage[] allWindows = { 
-		LoginWindow.INSTANCE,
+		//LoginWindow.INSTANCE,
 		AllMembersWindow.INSTANCE,	
 		AllBooksWindow.INSTANCE
 	};
@@ -84,11 +82,13 @@ public class Start extends Application {
             @Override
             public void handle(ActionEvent e) {
             	hideAllWindows();
+    		/*
     			if(!LoginWindow.INSTANCE.isInitialized()) {
     				LoginWindow.INSTANCE.init();
     			}
     			LoginWindow.INSTANCE.clear();
     			LoginWindow.INSTANCE.show();
+    		 */
             }
         });			
 							
@@ -100,6 +100,7 @@ public class Start extends Application {
 				if(!AllBooksWindow.INSTANCE.isInitialized()) {
 					AllBooksWindow.INSTANCE.init();
 				}
+			/*
 				ControllerInterface ci = new SystemController();
 				List<String> ids = ci.allBookIds();
 				Collections.sort(ids);
@@ -109,6 +110,7 @@ public class Start extends Application {
 				}
 				AllBooksWindow.INSTANCE.setData(sb.toString());
 				AllBooksWindow.INSTANCE.show();
+			 */
             }
 		});
 		
@@ -120,6 +122,7 @@ public class Start extends Application {
 				if(!AllMembersWindow.INSTANCE.isInitialized()) {
 					AllMembersWindow.INSTANCE.init();
 				}
+			/*
 				ControllerInterface ci = new SystemController();
 				List<String> ids = ci.allMemberIds();
 				Collections.sort(ids);
@@ -131,6 +134,7 @@ public class Start extends Application {
 				System.out.println(sb.toString());
 				AllMembersWindow.INSTANCE.setData(sb.toString());
 				AllMembersWindow.INSTANCE.show();
+			 */
             }
 		});	
 		optionsMenu.getItems().addAll(login, bookIds, memberIds);

@@ -1,6 +1,7 @@
 package com.cesarwillymc.libraryprojectmpp.business;
 
-import domain.exception.LoginException;
+
+import com.cesarwillymc.libraryprojectmpp.domain.exception.LoginException;
 
 import java.util.List;
 

@@ -27,16 +27,4 @@ public class PersonResponse implements Serializable {
 	public AddressResponse getAddress() {
 		return address;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-	public void setAddress(AddressResponse address) {
-		this.address = address;
-	}
 }
