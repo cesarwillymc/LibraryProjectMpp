@@ -7,13 +7,15 @@ import com.cesarwillymc.libraryprojectmpp.usecase.user.SignInUseCase;
 
 public class LoginControllerImpl implements LoginController {
     private SignInUseCase signInUseCase;
-    public LoginControllerImpl(SignInUseCase signInUseCase){
+
+    public LoginControllerImpl(SignInUseCase signInUseCase) {
         this.signInUseCase = signInUseCase;
     }
+
     @Override
     public Resource<User> signIn(String id, String password) {
-        System.out.println("ERROR " +id + "pass "+password);
-        return signInUseCase.run(new SignInParams(id,password));
+        System.out.println("ERROR " + id + "pass " + password);
+        return signInUseCase.run(new SignInParams(password, id));
     }
 
     @Override

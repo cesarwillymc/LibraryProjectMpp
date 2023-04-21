@@ -127,8 +127,10 @@ public class DataAccessFacade implements DataAccessDao {
     @Override
     public UserResponse signIn(String id, String password) throws LoginException {
         var user = Optional.ofNullable(readUserMap().get(id));
+        System.out.println("user is "+user.isEmpty()+" and  "+ id + " passport "+password);
         if (user.isEmpty())
             throw new LoginException("Id doesn't exist");
+        System.out.println("user data "+user.get());
         if (!user.get().getPassword().equals(password))
             throw new LoginException("Password incorrect");
 
