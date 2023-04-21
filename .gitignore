@@ -24,6 +24,8 @@ hs_err_pid*
 replay_pid*}
 build
 .gradle
-.gradle.*
 .idea
 gradle
+*.lock
+.gradle/7.6/checksums/checksums.lock
+*.xml
