@@ -1,5 +1,7 @@
 package com.cesarwillymc.libraryprojectmpp.domain.entities;
 
-public enum TypeAuth{
+import java.io.Serializable;
+
+public enum TypeAuth implements Serializable {
 	EMPLOYEE, ADMIN, BOTH, NONE
 }

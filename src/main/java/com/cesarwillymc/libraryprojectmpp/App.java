@@ -1,6 +1,7 @@
 package com.cesarwillymc.libraryprojectmpp;
 
 import com.cesarwillymc.libraryprojectmpp.ui.HomeScreen;
+import com.cesarwillymc.libraryprojectmpp.ui.di.AppDI;
 import com.cesarwillymc.libraryprojectmpp.ui.login.LoginScreen;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -13,6 +14,7 @@ import javafx.util.Duration;
 
 public class App extends Application {
     private Stage primaryStage;
+    private AppController appController = AppDI.createAppController();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -28,9 +30,11 @@ public class App extends Application {
         fadeTransition.setOnFinished(event -> {
             // Close splash screen and open main application window
             primaryStage.close();
-            openLoginApplicationWindow();
-
-
+            if (appController.isLogged()) {
+                openMainApplicationWindow();
+            } else {
+                openLoginApplicationWindow();
+            }
         });
 
         StackPane splashLayout = new StackPane(splashImageView);
@@ -42,13 +46,13 @@ public class App extends Application {
     }
 
     private void openMainApplicationWindow() {
-        var home=HomeScreen.INSTANCE;
+        var home = HomeScreen.INSTANCE;
         home.setStage(primaryStage);
         home.show();
     }
 
     private void openLoginApplicationWindow() {
-        var login=LoginScreen.INSTANCE;
+        var login = LoginScreen.INSTANCE;
         login.setStage(primaryStage);
         login.show();
     }

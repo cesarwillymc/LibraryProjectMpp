@@ -1,5 +1,8 @@
 package com.cesarwillymc.libraryprojectmpp.ui.login;
 
+import com.cesarwillymc.libraryprojectmpp.ui.HomeScreen;
+import com.cesarwillymc.libraryprojectmpp.ui.login.controller.LoginController;
+import com.cesarwillymc.libraryprojectmpp.ui.di.LoginDI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,12 +22,15 @@ public class LoginScreen extends Stage {
     private TextField usernameTextField;
     private PasswordField passwordField;
     private Text errorText;
-    private  Stage primaryStage;
+    private Stage primaryStage;
+
+    private LoginController controller;
 
     private LoginScreen() {
+        controller = LoginDI.createLoginController();
     }
 
-    public void setStage(Stage primaryStage){
+    public void setStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
         Scene scene = getSceneBody();
         // Create the input fields
@@ -68,7 +74,12 @@ public class LoginScreen extends Stage {
         // Create the login button
         Button loginButton = new Button("Login");
         loginButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14pt; -fx-padding: 10px 20px;");
-        loginButton.setOnAction(event -> validateCredentials());
+        loginButton.setOnAction(
+                event -> validateCredentials(
+                        usernameTextField.getText(),
+                        passwordField.getText()
+                )
+        );
 
         // Create the footer
         HBox footerBox = new HBox(errorText, loginButton);
@@ -86,15 +97,23 @@ public class LoginScreen extends Stage {
         return new Scene(borderPane, 600, 400);
     }
 
-    private void validateCredentials() {
-        String username = usernameTextField.getText();
-        String password = passwordField.getText();
-
-        if (username.equals("admin") && password.equals("password")) {
-            errorText.setText("");
-            System.out.println("Successful login!");
-        } else {
+    private void validateCredentials(String username, String password) {
+        if (!controller.isValidaSignIn(username, password))
             errorText.setText("Invalid username or password");
-        }
+        controller.signIn(username, password).apply(
+                user -> {
+                    errorText.setText("");
+                    close();
+                    openMainApplicationWindow();
+                },
+                fail -> errorText.setText(fail.getMessage()+" sadasd")
+        );
     }
+
+    private void openMainApplicationWindow() {
+        var home = HomeScreen.INSTANCE;
+        home.setStage(primaryStage);
+        home.show();
+    }
+
 }

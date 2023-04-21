@@ -115,11 +115,13 @@ public class DataAccessFacade implements DataAccessDao {
 
     @Override
     public UserResponse getUserLogged() {
-        HashMap<String, UserResponse> userMap = FileUtil.readFromStorage(StorageType.LOGGED);
-        if (userMap.size() == 0) {
+        Optional<HashMap<String, UserResponse>> userMap = Optional.ofNullable(FileUtil.readFromStorage(StorageType.LOGGED));
+        if (userMap.isEmpty())
+            return null;
+        if (userMap.get().size() == 0) {
             return null;
         }
-        return userMap.get("userLogged");
+        return userMap.get().get("userLogged");
     }
 
     @Override

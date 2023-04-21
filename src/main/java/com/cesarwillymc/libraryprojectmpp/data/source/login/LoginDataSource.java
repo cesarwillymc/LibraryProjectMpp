@@ -9,7 +9,7 @@ public interface LoginDataSource {
 
     Resource<Void> logout();
 
-    Resource<TypeAuth> getAuth();
+    Resource<User> getAuth();
 
     Resource<Boolean> isLoggedIn();
 }

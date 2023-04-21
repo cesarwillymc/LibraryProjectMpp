@@ -24,6 +24,10 @@ public class Resource<T> {
         return new Resource<T>(exception);
     }
 
+    public  T getData() {
+        return (T) data.get();
+    }
+
     public synchronized void apply(Consumer<T> consumer, Consumer<Exception> fail) {
         if (exception.isPresent()) {
             fail.accept(exception.get());
