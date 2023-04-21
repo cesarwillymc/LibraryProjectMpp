@@ -1,12 +1,16 @@
 package com.cesarwillymc.libraryprojectmpp.data.source.account.mapper;
 
-import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.AddressResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.LibraryMemberResponse;
-import com.cesarwillymc.libraryprojectmpp.data.source.mapper.Mapper;
-import com.cesarwillymc.libraryprojectmpp.domain.entities.Address;
+import com.cesarwillymc.libraryprojectmpp.data.utils.mapper.Mapper;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.LibraryMember;
 
 public class MemberMapper extends Mapper<LibraryMember, LibraryMemberResponse> {
+    private AddressMapper addressMapper;
+
+    public MemberMapper(AddressMapper addressMapper) {
+        this.addressMapper = addressMapper;
+    }
+
     @Override
     public LibraryMemberResponse domainToData(LibraryMember data) {
         return new LibraryMemberResponse(
@@ -14,27 +18,9 @@ public class MemberMapper extends Mapper<LibraryMember, LibraryMemberResponse> {
                 data.getFirstName(),
                 data.getLastName(),
                 data.getTelephone(),
-                from(data.getAddress())
+                addressMapper.domainToData(data.getAddress())
         );
     }
-
-    private AddressResponse from(Address data){
-        return new AddressResponse(
-                data.getStreet(),
-                data.getCity(),
-                data.getState(),
-                data.getZip()
-        );
-    }
-    private Address from(AddressResponse data){
-        return new Address(
-                data.street(),
-                data.city(),
-                data.state(),
-                data.zip()
-        );
-    }
-
     @Override
     public LibraryMember dataToDomain(LibraryMemberResponse data) {
         return new LibraryMember(
@@ -42,7 +28,7 @@ public class MemberMapper extends Mapper<LibraryMember, LibraryMemberResponse> {
                 data.getFirstName(),
                 data.getLastName(),
                 data.getTelephone(),
-                from(data.getAddress())
+                addressMapper.dataToDomain(data.getAddress())
         );
     }
 }

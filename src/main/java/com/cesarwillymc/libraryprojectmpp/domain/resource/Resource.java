@@ -37,4 +37,7 @@ public class Resource<T> {
             consumer.accept((T) data.get());
         }
     }
+    public boolean isSuccess(){
+       return exception.isEmpty();
+    }
 }

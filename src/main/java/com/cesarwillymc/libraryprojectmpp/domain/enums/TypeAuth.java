@@ -1,4 +1,4 @@
-package com.cesarwillymc.libraryprojectmpp.domain.entities;
+package com.cesarwillymc.libraryprojectmpp.domain.enums;
 
 import java.io.Serializable;
 

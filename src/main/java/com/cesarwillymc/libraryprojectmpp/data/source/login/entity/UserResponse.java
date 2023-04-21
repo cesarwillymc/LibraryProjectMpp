@@ -3,7 +3,7 @@ package com.cesarwillymc.libraryprojectmpp.data.source.login.entity;
 import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.AddressResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.PersonResponse;
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
-import com.cesarwillymc.libraryprojectmpp.domain.entities.TypeAuth;
+import com.cesarwillymc.libraryprojectmpp.domain.enums.TypeAuth;
 
 @EntityData
 public class UserResponse extends PersonResponse {

@@ -2,7 +2,7 @@ package com.cesarwillymc.libraryprojectmpp.data.source.customer.mapper;
 
 import com.cesarwillymc.libraryprojectmpp.data.source.customer.entity.BookCopyResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.customer.entity.BookResponse;
-import com.cesarwillymc.libraryprojectmpp.data.source.mapper.Mapper;
+import com.cesarwillymc.libraryprojectmpp.data.utils.mapper.Mapper;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.Book;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.BookCopy;
 import java.util.Arrays;

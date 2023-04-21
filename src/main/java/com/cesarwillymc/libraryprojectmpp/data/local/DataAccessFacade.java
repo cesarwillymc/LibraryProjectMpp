@@ -1,12 +1,13 @@
 package com.cesarwillymc.libraryprojectmpp.data.local;
 
 import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.AddressResponse;
+import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.entity.MemberRecordResponse;
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
 import com.cesarwillymc.libraryprojectmpp.data.local.util.FileUtil;
 import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.LibraryMemberResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.customer.entity.BookResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.login.entity.UserResponse;
-import com.cesarwillymc.libraryprojectmpp.domain.entities.TypeAuth;
+import com.cesarwillymc.libraryprojectmpp.domain.enums.TypeAuth;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.User;
 import com.cesarwillymc.libraryprojectmpp.domain.exception.LibrarySystemException;
 import com.cesarwillymc.libraryprojectmpp.domain.exception.LoginException;
@@ -127,14 +128,33 @@ public class DataAccessFacade implements DataAccessDao {
     @Override
     public UserResponse signIn(String id, String password) throws LoginException {
         var user = Optional.ofNullable(readUserMap().get(id));
-        System.out.println("user is "+user.isEmpty()+" and  "+ id + " passport "+password);
+        System.out.println("user is " + user.isEmpty() + " and  " + id + " passport " + password);
         if (user.isEmpty())
             throw new LoginException("Id doesn't exist");
-        System.out.println("user data "+user.get());
+        System.out.println("user data " + user.get());
         if (!user.get().getPassword().equals(password))
             throw new LoginException("Password incorrect");
 
         return user.get();
+    }
+
+    @Override
+    public void addMemberRecord(MemberRecordResponse recordResponse) throws LibrarySystemException {
+        var data = readMemberRecord();
+        data.put(recordResponse.id(), recordResponse);
+        FileUtil.saveToStorage(StorageType.RECORD_MEMBER, data);
+    }
+
+    @Override
+    public void updateMemberRecord(MemberRecordResponse recordResponse) throws LibrarySystemException {
+        var data = readMemberRecord();
+        data.put(recordResponse.id(), recordResponse);
+        FileUtil.saveToStorage(StorageType.RECORD_MEMBER, data);
+    }
+
+    @Override
+    public List<MemberRecordResponse> getAllMembersRecord() throws LibrarySystemException {
+        return readMemberRecord().values().stream().toList();
     }
 
     private HashMap<String, @EntityData BookResponse> readBookMap() {
@@ -147,6 +167,10 @@ public class DataAccessFacade implements DataAccessDao {
 
     private HashMap<String, @EntityData UserResponse> readUserMap() {
         return FileUtil.readFromStorage(StorageType.USERS);
+    }
+
+    private HashMap<String, @EntityData MemberRecordResponse> readMemberRecord() {
+        return FileUtil.readFromStorage(StorageType.RECORD_MEMBER);
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.cesarwillymc.libraryprojectmpp.data.source.mapper;
+package com.cesarwillymc.libraryprojectmpp.data.utils.mapper;
 
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityDomain;

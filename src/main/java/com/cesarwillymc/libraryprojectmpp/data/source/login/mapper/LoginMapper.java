@@ -2,7 +2,7 @@ package com.cesarwillymc.libraryprojectmpp.data.source.login.mapper;
 
 import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.AddressResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.login.entity.UserResponse;
-import com.cesarwillymc.libraryprojectmpp.data.source.mapper.Mapper;
+import com.cesarwillymc.libraryprojectmpp.data.utils.mapper.Mapper;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.Address;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.User;
 

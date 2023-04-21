@@ -1,6 +1,7 @@
 package com.cesarwillymc.libraryprojectmpp.domain.entities;
 
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityDomain;
+import com.cesarwillymc.libraryprojectmpp.domain.enums.TypeAuth;
 
 @EntityDomain
 public class User extends Person{
