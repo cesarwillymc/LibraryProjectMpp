@@ -5,6 +5,7 @@ import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
 import java.io.Serializable;
 @EntityData
 public class PersonResponse implements Serializable {
+	private static final long serialVersionUID = 11137994345555555L;
 	private String firstName;
 	private String lastName;
 	private String telephone;

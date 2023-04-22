@@ -15,7 +15,6 @@ public class BookDataMapper extends Mapper<Book, BookResponse> {
                 data.getAuthors(),
                 data.getIsbn(),
                 data.getTitle(),
-                data.getMaxCheckoutLength(),
                 data.getDateCreated(),
                 data.getDateUpdated()
         );
@@ -46,7 +45,6 @@ public class BookDataMapper extends Mapper<Book, BookResponse> {
                 data.authors(),
                 data.isbn(),
                 data.title(),
-                data.maxCheckoutLength(),
                 data.dateCreated(),
                 data.dateUpdated()
         );

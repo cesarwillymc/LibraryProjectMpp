@@ -154,7 +154,11 @@ public class DataAccessFacade implements DataAccessDao {
 
     @Override
     public List<MemberRecordResponse> getAllMembersRecord() throws LibrarySystemException {
-        return readMemberRecord().values().stream().toList();
+        try {
+           return readMemberRecord().values().stream().toList();
+        }catch (Exception e){
+            throw new LibrarySystemException("File no found");
+        }
     }
 
     private HashMap<String, @EntityData BookResponse> readBookMap() {
@@ -187,6 +191,12 @@ public class DataAccessFacade implements DataAccessDao {
         userMap.put(user1.getId(), user1);
         userMap.put(user2.getId(), user2);
         userMap.put(user3.getId(), user3);
-        FileUtil.saveToStorage(StorageType.USERS, userMap);
+        var booksMap = new HashMap<String, BookResponse>();
+        var membersMap = new HashMap<String, LibraryMemberResponse>();
+
+        System.out.println(new DataAccessFacade().readMemberMap().values().stream().toList());
+        //FileUtil.saveToStorage(StorageType.USERS, userMap);
+        //FileUtil.saveToStorage(StorageType.BOOKS, booksMap);
+      //  FileUtil.saveToStorage(StorageType.MEMBERS, membersMap);
     }
 }

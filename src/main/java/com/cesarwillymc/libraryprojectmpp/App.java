@@ -38,7 +38,7 @@ public class App extends Application {
         });
 
         StackPane splashLayout = new StackPane(splashImageView);
-        Scene splashScene = new Scene(splashLayout);
+        Scene splashScene = new Scene(splashLayout, 800, 600);
         splashScene.setFill(null);
         stage.setScene(splashScene);
         stage.show();

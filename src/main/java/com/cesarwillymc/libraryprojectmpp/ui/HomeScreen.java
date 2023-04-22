@@ -3,6 +3,7 @@ package com.cesarwillymc.libraryprojectmpp.ui;
 import com.cesarwillymc.libraryprojectmpp.ui.books.BookView;
 import com.cesarwillymc.libraryprojectmpp.ui.home.DashboardView;
 import com.cesarwillymc.libraryprojectmpp.ui.home.view.Menu;
+import com.cesarwillymc.libraryprojectmpp.ui.login.LoginScreen;
 import com.cesarwillymc.libraryprojectmpp.ui.members.MemberView;
 import com.cesarwillymc.libraryprojectmpp.ui.profile.ProfileView;
 import javafx.scene.Parent;
@@ -22,9 +23,22 @@ public class HomeScreen extends Stage {
         primaryStage = stage;
         // Create instances of all the views
         dashboardView = new DashboardView();
-        bookView = new BookView();
-        memberView = new MemberView();
-        profileView = new ProfileView();
+        bookView = new BookView(()->{
+
+        },(s)->{
+
+        });
+        memberView = new MemberView(()->{
+
+        }, (S)->{
+
+        });
+        profileView = new ProfileView(()->{
+            close();
+            var login = LoginScreen.INSTANCE;
+            login.setStage(primaryStage);
+            login.show();
+        });
         menu = new Menu(dashboardView, bookView, memberView, profileView);
 
         menu.switchToDashboard();

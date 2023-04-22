@@ -15,6 +15,7 @@ public record MemberRecordResponse(
         LocalDate dateDue,
         LocalDate dateReturned
 ) implements Serializable {
+    private static final long serialVersionUID = 1113799434508676095L;
 }
 
 

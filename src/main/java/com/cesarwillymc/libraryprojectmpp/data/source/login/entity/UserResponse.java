@@ -5,8 +5,12 @@ import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.PersonRespo
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
 import com.cesarwillymc.libraryprojectmpp.domain.enums.TypeAuth;
 
+import java.io.Serializable;
+
 @EntityData
-public class UserResponse extends PersonResponse {
+public class UserResponse extends PersonResponse implements Serializable {
+    private static final long serialVersionUID = 1113799434508612345L;
+
     String id;
     String password;
     TypeAuth authorization;

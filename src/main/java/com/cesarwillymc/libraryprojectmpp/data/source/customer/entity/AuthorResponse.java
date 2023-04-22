@@ -7,6 +7,7 @@ import com.cesarwillymc.libraryprojectmpp.domain.entities.Person;
 import java.io.Serializable;
 @EntityData
 final public class AuthorResponse extends Person implements Serializable {
+
 	private final String bio;
 	public String getBio() {
 		return bio;

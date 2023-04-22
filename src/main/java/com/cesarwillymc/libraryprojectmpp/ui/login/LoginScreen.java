@@ -2,7 +2,7 @@ package com.cesarwillymc.libraryprojectmpp.ui.login;
 
 import com.cesarwillymc.libraryprojectmpp.ui.HomeScreen;
 import com.cesarwillymc.libraryprojectmpp.ui.login.controller.LoginController;
-import com.cesarwillymc.libraryprojectmpp.ui.di.LoginDI;
+import com.cesarwillymc.libraryprojectmpp.ui.di.DIControllers;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,7 +27,7 @@ public class LoginScreen extends Stage {
     private LoginController controller;
 
     private LoginScreen() {
-        controller = LoginDI.createLoginController();
+        controller = DIControllers.createLoginController();
     }
 
     public void setStage(Stage primaryStage) {
@@ -94,19 +94,24 @@ public class LoginScreen extends Stage {
         borderPane.setCenter(inputGridPane);
         borderPane.setBottom(footerBox);
 
-        return new Scene(borderPane, 600, 400);
+        return new Scene(borderPane, 800, 600);
     }
 
     private void validateCredentials(String username, String password) {
-        if (!controller.isValidaSignIn(username, password))
+        if (!controller.isValidaSignIn(username, password)) {
+            errorText.setText("");
             errorText.setText("Invalid username or password");
+        }
         controller.signIn(username, password).apply(
                 user -> {
                     errorText.setText("");
                     close();
                     openMainApplicationWindow();
                 },
-                fail -> errorText.setText(fail.getMessage()+" sadasd")
+                fail -> {
+                    errorText.setText("");
+                    errorText.setText(fail.getMessage());
+                }
         );
     }
 

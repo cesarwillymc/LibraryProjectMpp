@@ -21,25 +21,22 @@ final public class Book implements Serializable {
 	private List<Author> authors;
 	private String isbn;
 	private String title;
-	private int maxCheckoutLength;
 	private LocalDate dateCreated;
 	private LocalDate dateUpdated;
 
 
-	public Book(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
+	public Book(String isbn, String title, List<Author> authors) {
 		this.isbn = isbn;
 		this.title = title;
-		this.maxCheckoutLength = maxCheckoutLength;
 		this.authors = Collections.unmodifiableList(authors);
 		copies = new BookCopy[]{new BookCopy(this, 1, true)};	
 	}
 
-	public Book(BookCopy[] copies, List<Author> authors, String isbn, String title, int maxCheckoutLength, LocalDate dateCreated, LocalDate dateUpdated) {
+	public Book(BookCopy[] copies, List<Author> authors, String isbn, String title, LocalDate dateCreated, LocalDate dateUpdated) {
 		this.copies = copies;
 		this.authors = authors;
 		this.isbn = isbn;
 		this.title = title;
-		this.maxCheckoutLength = maxCheckoutLength;
 		this.dateCreated = dateCreated;
 		this.dateUpdated = dateUpdated;
 	}
@@ -90,7 +87,7 @@ final public class Book implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "isbn: " + isbn + ", maxLength: " + maxCheckoutLength + ", available: " + isAvailable();
+		return "isbn: " + isbn +  ", available: " + isAvailable();
 	}
 	
 	public int getNumCopies() {
@@ -126,9 +123,6 @@ final public class Book implements Serializable {
 			}
 		}
 		return null;
-	}
-	public int getMaxCheckoutLength() {
-		return maxCheckoutLength;
 	}
 
 

@@ -12,4 +12,5 @@ public record AddressResponse(
         String state,
         String zip
 ) implements Serializable {
+    private static final long serialVersionUID = 1113799434511123213L;
 }

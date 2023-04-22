@@ -49,4 +49,14 @@ public class User extends Person{
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", password='" + password + '\'' +
+                ", authorization=" + authorization +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }

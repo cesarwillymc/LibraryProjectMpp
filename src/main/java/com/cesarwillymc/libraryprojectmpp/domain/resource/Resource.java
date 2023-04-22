@@ -15,7 +15,7 @@ public class Resource<T> {
 
     Resource(T da) {
         exception = Optional.empty();
-        data = Optional.of(da);
+        data = Optional.ofNullable(da);
     }
 
     public static <T> Resource<T> Sucess(T data) {
