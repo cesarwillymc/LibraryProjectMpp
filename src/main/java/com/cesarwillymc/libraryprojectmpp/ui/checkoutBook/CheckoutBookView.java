@@ -84,6 +84,9 @@ public class CheckoutBookView implements View {
             if (controller.getLibraryMember() == null) {
                 new DialogError("Validation Fail", "Add a library member");
             }
+            if (!controller.getBook().isAvailable()) {
+                new DialogError("Validation Fail", "Doesn't have copies");
+            }
             controller.saveMemberCheckout().apply(s -> {
                 openDialogSuccess();
             }, e -> {

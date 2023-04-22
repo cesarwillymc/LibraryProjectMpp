@@ -128,6 +128,13 @@ final public class Book implements Serializable {
         return optional.orElse(null);
     }
 
+    public Integer getTotalBookAvailable() {
+        List<BookCopy> optional
+                = Arrays.stream(copies)
+                .filter(BookCopy::isAvailable).toList();
+        return optional.size();
+    }
+
     public BookCopy getCopy(int copyNum) {
         for (BookCopy c : copies) {
             if (copyNum == c.getCopyNum()) {

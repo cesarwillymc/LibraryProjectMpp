@@ -32,66 +32,73 @@ public class DIControllers {
     public static LoginController createLoginController() {
         return new LoginControllerImpl(new SignInUseCase(LoginFactoryDataSource.getLoginDataSource(new DataAccessFacade())));
     }
+
     public static HomeController createHomeController() {
         var dao = new DataAccessFacade();
         var useCase = new GetAllMembersUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
         var useCase2 = new GetAllMembersRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
 
-        return new HomeController(useCase,useCase2);
+        return new HomeController(useCase, useCase2);
     }
 
-    public static ProfileController createProfileController(){
+    public static ProfileController createProfileController() {
         var dao = new DataAccessFacade();
-        var useCase1= new GetUserLoggedUseCase(LoginFactoryDataSource.getLoginDataSource(dao));
-        var useCase2= new SignOutUseCase(LoginFactoryDataSource.getLoginDataSource(dao));
-        return new ProfileController(useCase1,useCase2);
+        var useCase1 = new GetUserLoggedUseCase(LoginFactoryDataSource.getLoginDataSource(dao));
+        var useCase2 = new SignOutUseCase(LoginFactoryDataSource.getLoginDataSource(dao));
+        return new ProfileController(useCase1, useCase2);
     }
-    public static MemberController createMemberController(){
+
+    public static MemberController createMemberController() {
         var dao = new DataAccessFacade();
         var useCase = new GetAllMembersUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
 
         return new MemberController(useCase);
     }
-    public static AddMemberController createAddMemberController(){
+
+    public static AddMemberController createAddMemberController() {
         var dao = new DataAccessFacade();
         var useCase = new AddMemberUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
 
         return new AddMemberController(useCase);
     }
-    public static DetailMemberController createDetailMemberController(){
+
+    public static DetailMemberController createDetailMemberController() {
         var dao = new DataAccessFacade();
         var useCase = new GetMemberByIdUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
         var useCase2 = new GetMemberRecordByUserIdUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
-        var useCase3 = new UpdateMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
-        return new DetailMemberController(useCase,useCase2,useCase3);
+        var useCase3 = new UpdateMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao), BookFactoryDataSource.getBookDataSource(dao));
+        return new DetailMemberController(useCase, useCase2, useCase3);
     }
-    public static BookController createBookController(){
+
+    public static BookController createBookController() {
         var dao = new DataAccessFacade();
         var useCase = new GetAllBooksUseCase(BookFactoryDataSource.getBookDataSource(dao));
 
         return new BookController(useCase);
     }
-    public static AddBookController createAddBookController(){
+
+    public static AddBookController createAddBookController() {
         var dao = new DataAccessFacade();
         var useCase = new AddBookUseCase(BookFactoryDataSource.getBookDataSource(dao));
 
         return new AddBookController(useCase);
     }
 
-    public static BookDetailController createDetailBookController(){
+    public static BookDetailController createDetailBookController() {
         var dao = new DataAccessFacade();
         var useCase = new UpdateBookUseCase(BookFactoryDataSource.getBookDataSource(dao));
         var useCase2 = new GetMemberRecordByBookIdUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
-        var useCase3 = new UpdateMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
+        var useCase3 = new UpdateMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao), BookFactoryDataSource.getBookDataSource(dao));
 
-        return new BookDetailController(useCase,useCase2,useCase3);
+        return new BookDetailController(useCase, useCase2, useCase3);
     }
-    public static CheckoutController createCheckoutController(){
+
+    public static CheckoutController createCheckoutController() {
         var dao = new DataAccessFacade();
         var useCase = new GetMemberByIdUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
         var useCase2 = new GetBookByIdUseCase(BookFactoryDataSource.getBookDataSource(dao));
-        var useCase3 = new AddMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
+        var useCase3 = new AddMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao), bookDataSource);
 
-        return new CheckoutController(useCase,useCase2,useCase3);
+        return new CheckoutController(useCase, useCase2, useCase3);
     }
 }

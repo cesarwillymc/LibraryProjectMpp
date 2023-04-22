@@ -15,6 +15,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -33,6 +35,7 @@ public class BookDetailScreen extends Stage {
     Button backButton;
     BookDetailController controller = DIControllers.createDetailBookController();
     Label numOfCopiesLabel;
+    Label numOfCopiesLabelAvailable;
     Book book;
     private TableView<LibraryMemberUI> tableView;
 
@@ -45,11 +48,19 @@ public class BookDetailScreen extends Stage {
         setTitle("Detail of " + book.getTitle());
         // Create labels to display book information
         Label isbnLabel = new Label("ISBN: " + book.getIsbn());
+        isbnLabel.setOnMouseClicked(e -> {
+            final Clipboard clipboard = Clipboard.getSystemClipboard();
+            final ClipboardContent content = new ClipboardContent();
+            content.putString(book.getIsbn());
+            clipboard.setContent(content);
+        });
+
         Label titleLabel = new Label("Title: " + book.getTitle());
         Label authorsLabel = new Label("Authors: " + book.getAuthors().stream()
                 .map(Author::toString)
                 .collect(Collectors.joining(", ")));
         numOfCopiesLabel = new Label("Number of Copies: " + book.getNumCopies());
+        numOfCopiesLabelAvailable = new Label("Number of Copies Available: " + book.getTotalBookAvailable());
 
         // Create button to add more copies of book
         Button addCopyButton = new Button("Add More Copies");
@@ -66,7 +77,7 @@ public class BookDetailScreen extends Stage {
         tableView = createTableView();
         VBox root = new VBox();
         // Add components to screen
-        VBox topBox = new VBox(10, isbnLabel, titleLabel, authorsLabel, numOfCopiesLabel, addCopyButton);
+        VBox topBox = new VBox(10, isbnLabel, titleLabel, authorsLabel, numOfCopiesLabel, numOfCopiesLabelAvailable, addCopyButton);
 
         topBox.setPadding(new Insets(10));
 
@@ -100,7 +111,7 @@ public class BookDetailScreen extends Stage {
                     int copiesToAdd = Integer.parseInt(copyToAddField.getText());
                     book.addCopies(copiesToAdd);
                     controller.updateNumOfCopies(book).apply(s -> {
-                        numOfCopiesLabel.setText("Number of Copies: " + book.getNumCopies());
+                        numOfCopiesLabelAvailable.setText("Number of Copies Available: " + book.getTotalBookAvailable() + 1);
                     }, e -> {
                         new DialogError("Error", "Add num of copies failed");
                     });
@@ -124,7 +135,7 @@ public class BookDetailScreen extends Stage {
                 var typeBook = x.getStatusReturnBook();
                 return new LibraryMemberUI(
                         x.getBook().getCopyNum(),
-                        x.getBook().getName(),
+                        x.getMemberResponse().getFirstName(),
                         x.getBook().getBookISBN(),
                         x.getDateBorrow(),
                         x.getDateDue(),
@@ -145,7 +156,7 @@ public class BookDetailScreen extends Stage {
 
         TableColumn<LibraryMemberUI, Integer> idCopyBook = new TableColumn<>("Id book");
         idCopyBook.setCellValueFactory(new PropertyValueFactory<>("idCopyBook"));
-        TableColumn<LibraryMemberUI, String> titleCol = new TableColumn<>("Title");
+        TableColumn<LibraryMemberUI, String> titleCol = new TableColumn<>("Usuario");
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         TableColumn<LibraryMemberUI, String> isbnCol = new TableColumn<>("ISBN");
@@ -205,7 +216,7 @@ public class BookDetailScreen extends Stage {
                 }
             }
         });
-        table.getColumns().addAll(idCopyBook,titleCol, isbnCol, dateBorrowCol, dateDueCol, dateReturnedCol, statusCol, typeStatusCol, changeState);
+        table.getColumns().addAll(idCopyBook, titleCol, isbnCol, dateBorrowCol, dateDueCol, dateReturnedCol, statusCol, typeStatusCol, changeState);
 
         return table;
     }

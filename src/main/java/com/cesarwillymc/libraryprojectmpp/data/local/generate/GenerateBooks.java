@@ -15,7 +15,7 @@ public class GenerateBooks {
         BookResponse[] books = new BookResponse[11];
 
         books[0] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9780521799561", "The Catcher in the Rye", 11, true)},
+                new BookCopyResponse[]{new BookCopyResponse("9780521799561", "The Catcher in the Rye", 1, true)},
                 List.of(new Author("J.D.", "Salinger")),
                 "9780521799561",
                 "The Catcher in the Rye",
@@ -23,7 +23,7 @@ public class GenerateBooks {
                 LocalDate.of(2022, 1, 2)
         );
         books[1] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9780670020553", "The Fault in Our Stars", 10, false)},
+                new BookCopyResponse[]{new BookCopyResponse("9780670020553", "The Fault in Our Stars", 1, true)},
                 List.of(new Author("John", "Green")),
                 "9780670020553",
                 "The Fault in Our Stars",
@@ -31,7 +31,7 @@ public class GenerateBooks {
                 LocalDate.of(2022, 1, 4)
         );
         books[2] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9780061122415", "To Kill a Mockingbird", 50, true), new BookCopyResponse("9780061122415", "To Kill a Mockingbird", 12, false)},
+                new BookCopyResponse[]{new BookCopyResponse("9780061122415", "To Kill a Mockingbird", 1, true), new BookCopyResponse("9780061122415", "To Kill a Mockingbird", 1, true)},
                 List.of(new Author("Harper", "Lee")),
                 "9780061122415",
                 "To Kill a Mockingbird",
@@ -39,7 +39,7 @@ public class GenerateBooks {
                 LocalDate.of(2022, 1, 6)
         );
         books[3] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9780743273565", "The Da Vinci Code", 20, true)},
+                new BookCopyResponse[]{new BookCopyResponse("9780743273565", "The Da Vinci Code", 1, true)},
                 List.of(new Author("Dan", "Brown")),
                 "9780743273565",
                 "The Da Vinci Code",
@@ -47,7 +47,7 @@ public class GenerateBooks {
                 LocalDate.of(2022, 1, 8)
         );
         books[4] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9780739326222", "The Kite Runner", 123, true), new BookCopyResponse("9780739326222", "The Kite Runner", 3, true)},
+                new BookCopyResponse[]{new BookCopyResponse("9780739326222", "The Kite Runner", 1, true), new BookCopyResponse("9780739326222", "The Kite Runner", 2, true)},
                 List.of(new Author("Khaled", "Hosseini")),
                 "9780739326222",
                 "The Kite Runner",
@@ -63,7 +63,7 @@ public class GenerateBooks {
                 LocalDate.of(2022, 1, 2)
         );
         books[6] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9780137081073", "Clean Code: A Handbook of Agile Software Craftsmanship", 19, false)},
+                new BookCopyResponse[]{new BookCopyResponse("9780137081073", "Clean Code: A Handbook of Agile Software Craftsmanship", 1, true)},
                 List.of(new Author("Robert", "Martin")),
                 "9780137081073",
                 "Clean Code: A Handbook of Agile Software Craftsmanship",
@@ -71,7 +71,7 @@ public class GenerateBooks {
                 LocalDate.of(2022, 1, 4)
         );
         books[7] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9780321714114", "The C++ Programming Language", 12, true)},
+                new BookCopyResponse[]{new BookCopyResponse("9780321714114", "The C++ Programming Language", 1, true)},
                 List.of(new Author("Bjarne", "Stroustrup")),
                 "9780321714114",
                 "The C++ Programming Language",
@@ -79,7 +79,7 @@ public class GenerateBooks {
                 LocalDate.of(2022, 1, 6)
         );
         books[8] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9780596009205",   "Head First Design Patterns", 11, true)},
+                new BookCopyResponse[]{new BookCopyResponse("9780596009205",   "Head First Design Patterns", 1, true)},
                 List.of(new Author("Eric", "Freeman"), new Author("Elisabeth", "Robson")),
                 "9780596009205",
                 "Head First Design Patterns",
@@ -87,7 +87,7 @@ public class GenerateBooks {
                 LocalDate.of(2022, 1, 8)
         );
         books[9] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9780132350884", "Effective Java: Programming Language Guide", 112, true)},
+                new BookCopyResponse[]{new BookCopyResponse("9780132350884", "Effective Java: Programming Language Guide", 1, true)},
                 List.of(new Author("Joshua", "Bloch")),
                 "9780132350884",
                 "Effective Java: Programming Language Guide",
@@ -95,7 +95,7 @@ public class GenerateBooks {
                 LocalDate.of(2022, 1, 10)
         );
         books[10] = new BookResponse(
-                new BookCopyResponse[]{new BookCopyResponse("9781491904244", "You Don't Know JS", 121, false)},
+                new BookCopyResponse[]{new BookCopyResponse("9781491904244", "You Don't Know JS", 1, true)},
                 List.of(new Author("Kyle", "Simpson")),
                 "9781491904244",
                 "You Don't Know JS",
