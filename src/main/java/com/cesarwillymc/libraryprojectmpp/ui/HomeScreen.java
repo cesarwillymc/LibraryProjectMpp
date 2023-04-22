@@ -1,7 +1,9 @@
 package com.cesarwillymc.libraryprojectmpp.ui;
 
 import com.cesarwillymc.libraryprojectmpp.ui.books.AddBookScreen;
+import com.cesarwillymc.libraryprojectmpp.ui.books.BookDetailScreen;
 import com.cesarwillymc.libraryprojectmpp.ui.books.BookView;
+import com.cesarwillymc.libraryprojectmpp.ui.checkoutBook.CheckoutBookView;
 import com.cesarwillymc.libraryprojectmpp.ui.home.DashboardView;
 import com.cesarwillymc.libraryprojectmpp.ui.home.view.Menu;
 import com.cesarwillymc.libraryprojectmpp.ui.login.LoginScreen;
@@ -20,6 +22,7 @@ public class HomeScreen extends Stage {
     private BookView bookView;
     private MemberView memberView;
     private ProfileView profileView;
+    private CheckoutBookView checkoutBookView;
     private Stage primaryStage;
 
     public void setStage(Stage stage) {
@@ -34,6 +37,10 @@ public class HomeScreen extends Stage {
             addBookScreen.show();
         },(s)->{
 
+            var bookDetailScreen = BookDetailScreen.INSTANCE;
+            hide();
+            bookDetailScreen.setStage(this,s);
+            bookDetailScreen.show();
         });
         memberView = new MemberView(()->{
             var addMemberScreen = AddMemberScreen.INSTANCE;
@@ -52,7 +59,9 @@ public class HomeScreen extends Stage {
             login.setStage(primaryStage);
             login.show();
         });
-        menu = new Menu(dashboardView, bookView, memberView, profileView);
+
+        checkoutBookView = new CheckoutBookView();
+        menu = new Menu(dashboardView, bookView, memberView, profileView, checkoutBookView);
 
         menu.switchToDashboard();
 

@@ -31,7 +31,7 @@ public class BookView implements View {
 
     private BookController controller = DIControllers.createBookController();
 
-    public BookView(Runnable navigateAddBook, Consumer<String> navigateBookDetail) {
+    public BookView(Runnable navigateAddBook, Consumer<Book> navigateBookDetail) {
         // Create a BorderPane to hold all the components
         ListView<BookCard> cardList = new ListView<>(FXCollections.observableArrayList());
 
@@ -98,7 +98,7 @@ public class BookView implements View {
         cardList.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) { // double-click
                 var selectedItem = cardList.getSelectionModel().getSelectedItem();
-                navigateBookDetail.accept(selectedItem.getIsbn());
+                navigateBookDetail.accept(selectedItem.getBook());
                 cardList.getSelectionModel().clearSelection();
             }
         });

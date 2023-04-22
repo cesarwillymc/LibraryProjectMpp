@@ -53,9 +53,17 @@ public class AddBookScreen extends Stage {
         addAuthorButton.setOnAction(event -> addAuthor());
 
         Button saveButton = new Button("Save");
+        Button backButton = new Button("Back previous screen");
+        backButton.setPadding(new Insets(15));
+        saveButton.setPadding(new Insets(15));
         saveButton.setOnAction(event -> {
            if( isValidateForm())
             saveBook();
+        });
+
+        backButton.setOnAction(event -> {
+            close();
+            stage.show();
         });
 
         GridPane formGrid = new GridPane();
@@ -73,11 +81,13 @@ public class AddBookScreen extends Stage {
         formGrid.add(numOfCopiesField, 1, 4);
 
         HBox buttonBox = new HBox();
+        buttonBox.setSpacing(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setPadding(new Insets(10));
-        buttonBox.getChildren().add(saveButton);
+        buttonBox.getChildren().addAll(saveButton,backButton);
 
         VBox root = new VBox();
+        root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(formGrid, buttonBox);
 

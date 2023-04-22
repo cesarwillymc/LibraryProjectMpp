@@ -73,11 +73,11 @@ final public class Book implements Serializable {
 
     }
 
-    public void addCopy() {
-        BookCopy[] newArr = new BookCopy[copies.length + 1];
-        System.arraycopy(copies, 0, newArr, 0, copies.length);
-        newArr[copies.length] = new BookCopy(getIsbn(), copies.length + 1, true);
-        copies = newArr;
+    public void addCopies(Integer num) {
+        var copiesNew =Stream.iterate(copies.length, x -> x + 1).map(x -> new BookCopy(getIsbn(), x, true)).limit(num).toList();
+        var copyOld = new ArrayList<>(List.of(copies));
+        copyOld.addAll(copiesNew);
+        copies = copyOld.toArray(BookCopy[]::new);
     }
 
 

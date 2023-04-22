@@ -66,13 +66,9 @@ public class BookController {
         data.accept(books.stream().map(this::from).collect(Collectors.toList()));
     }
 
-    private BookCard from(Book book){
+    private BookCard from(Book book) {
         return new BookCard(
-                book.getIsbn(),
-                book.getTitle(),
-                book.getDateCreated(),
-                book.getDateUpdated(),
-                book.getNumCopies()
+                book
         );
     }
 }
