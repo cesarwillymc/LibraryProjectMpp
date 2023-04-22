@@ -24,6 +24,7 @@ public class ProfileView implements View {
     public ProfileView(Runnable navigate) {
         // Create chart nodes and add them to a parent node
         // Set up UI
+
         root = new BorderPane();
         setUpHeader();
 
@@ -36,6 +37,7 @@ public class ProfileView implements View {
     }
 
     public void showErrorMessage(Exception e) {
+
         Image image = new Image("https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-1920.jpg?w=2000", 100, 100, true, false);
         ImageView imageView = new ImageView(image);
         Label label = new Label(e.getMessage(), imageView);

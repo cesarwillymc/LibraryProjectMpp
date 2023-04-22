@@ -35,6 +35,7 @@ public class AddMemberScreen extends Stage {
     }
 
     public void setStage(HomeScreen previusStage) {
+        setTitle("Add Member");
         this.previusStage = previusStage;
         // Create labels
         Label documentLabel = new Label("Number document:");

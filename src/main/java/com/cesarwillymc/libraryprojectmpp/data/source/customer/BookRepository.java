@@ -19,7 +19,11 @@ class BookRepository implements BookDataSource {
 
     @Override
     public Resource<List<Book>> getAllBooks() {
-        return Resource.Sucess(mapper.dataToDomain(dataAccess.getAllBooks()));
+        try {
+            return Resource.Sucess(mapper.dataToDomain(dataAccess.getAllBooks()));
+        } catch (LibrarySystemException e) {
+            return Resource.Error(e);
+        }
     }
 
     @Override

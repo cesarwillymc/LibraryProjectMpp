@@ -16,7 +16,7 @@ import java.util.List;
 public interface DataAccessDao {
 
     // Book
-    List<BookResponse> getAllBooks();
+    List<BookResponse> getAllBooks() throws LibrarySystemException;
 
     BookResponse getBookById(String id) throws LibrarySystemException;
 
@@ -27,7 +27,7 @@ public interface DataAccessDao {
     void removeBook(String id) throws LibrarySystemException;
 
     // LibraryMember
-    List<LibraryMemberResponse> getAllMembers();
+    List<LibraryMemberResponse> getAllMembers() throws LibrarySystemException;
 
     LibraryMemberResponse getMemberById(String id) throws LibrarySystemException;
 

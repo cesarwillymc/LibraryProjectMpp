@@ -1,5 +1,6 @@
 package com.cesarwillymc.libraryprojectmpp.ui;
 
+import com.cesarwillymc.libraryprojectmpp.ui.books.AddBookScreen;
 import com.cesarwillymc.libraryprojectmpp.ui.books.BookView;
 import com.cesarwillymc.libraryprojectmpp.ui.home.DashboardView;
 import com.cesarwillymc.libraryprojectmpp.ui.home.view.Menu;
@@ -27,6 +28,10 @@ public class HomeScreen extends Stage {
         dashboardView = new DashboardView();
         bookView = new BookView(()->{
 
+            var addBookScreen = AddBookScreen.INSTANCE;
+            hide();
+            addBookScreen.setStage(this);
+            addBookScreen.show();
         },(s)->{
 
         });

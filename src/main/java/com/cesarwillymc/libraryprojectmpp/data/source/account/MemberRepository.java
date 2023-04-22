@@ -29,7 +29,11 @@ class MemberRepository implements MemberDataSource {
 
     @Override
     public Resource<List<LibraryMember>> getAllMembers() {
-        return Resource.Sucess(mapper.dataToDomain(dataAccess.getAllMembers()));
+        try {
+            return Resource.Sucess(mapper.dataToDomain(dataAccess.getAllMembers()));
+        } catch (LibrarySystemException e) {
+            return Resource.Error(e);
+        }
     }
 
     @Override

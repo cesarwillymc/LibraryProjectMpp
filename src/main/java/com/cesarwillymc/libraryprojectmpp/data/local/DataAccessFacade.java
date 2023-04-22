@@ -21,8 +21,12 @@ public class DataAccessFacade implements DataAccessDao {
     public static final String DATE_PATTERN = "MM/dd/yyyy";
 
     @Override
-    public List<BookResponse> getAllBooks() {
-        return readBookMap().values().stream().toList();
+    public List<BookResponse> getAllBooks() throws LibrarySystemException {
+        try {
+            return readBookMap().values().stream().toList();
+        }catch (Exception e){
+            throw new LibrarySystemException("File no found");
+        }
     }
 
     @Override
@@ -67,8 +71,13 @@ public class DataAccessFacade implements DataAccessDao {
     }
 
     @Override
-    public List<LibraryMemberResponse> getAllMembers() {
-        return readMemberMap().values().stream().toList();
+    public List<LibraryMemberResponse> getAllMembers() throws LibrarySystemException {
+        try {
+            return readMemberMap().values().stream().toList();
+        }catch (Exception e){
+            throw new LibrarySystemException("File no found");
+        }
+
     }
 
     @Override
@@ -196,7 +205,7 @@ public class DataAccessFacade implements DataAccessDao {
 
         System.out.println(new DataAccessFacade().readMemberMap().values().stream().toList());
         //FileUtil.saveToStorage(StorageType.USERS, userMap);
-        //FileUtil.saveToStorage(StorageType.BOOKS, booksMap);
+        FileUtil.saveToStorage(StorageType.BOOKS, booksMap);
       //  FileUtil.saveToStorage(StorageType.MEMBERS, membersMap);
     }
 }

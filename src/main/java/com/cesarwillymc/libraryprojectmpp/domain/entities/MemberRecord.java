@@ -7,12 +7,12 @@ import java.time.LocalDate;
 public class MemberRecord {
     private String id;
     private LibraryMember memberResponse;
-    private Book book;
+    private BookCopy book;
     private LocalDate dateBorrow;
     private LocalDate dateDue;
     private LocalDate dateReturned;
 
-    public MemberRecord(String id, LibraryMember memberResponse, Book book, LocalDate dateBorrow, LocalDate dateDue, LocalDate dateReturned) {
+    public MemberRecord(String id, LibraryMember memberResponse, BookCopy book, LocalDate dateBorrow, LocalDate dateDue, LocalDate dateReturned) {
         this.id = id;
         this.memberResponse = memberResponse;
         this.book = book;
@@ -29,7 +29,7 @@ public class MemberRecord {
         return memberResponse;
     }
 
-    public Book getBook() {
+    public BookCopy getBook() {
         return book;
     }
 

@@ -2,8 +2,11 @@ package com.cesarwillymc.libraryprojectmpp.ui.di;
 
 import com.cesarwillymc.libraryprojectmpp.data.local.DataAccessFacade;
 import com.cesarwillymc.libraryprojectmpp.data.source.account.MemberFactoryDataSource;
+import com.cesarwillymc.libraryprojectmpp.data.source.customer.BookFactoryDataSource;
 import com.cesarwillymc.libraryprojectmpp.data.source.login.LoginFactoryDataSource;
 import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.MemberRecordFactoryDataSource;
+import com.cesarwillymc.libraryprojectmpp.ui.books.controller.AddBookController;
+import com.cesarwillymc.libraryprojectmpp.ui.books.controller.BookController;
 import com.cesarwillymc.libraryprojectmpp.ui.home.controller.HomeController;
 import com.cesarwillymc.libraryprojectmpp.ui.login.controller.LoginController;
 import com.cesarwillymc.libraryprojectmpp.ui.login.controller.LoginControllerImpl;
@@ -11,6 +14,8 @@ import com.cesarwillymc.libraryprojectmpp.ui.members.controller.AddMemberControl
 import com.cesarwillymc.libraryprojectmpp.ui.members.controller.DetailMemberController;
 import com.cesarwillymc.libraryprojectmpp.ui.members.controller.MemberController;
 import com.cesarwillymc.libraryprojectmpp.ui.profile.controller.ProfileController;
+import com.cesarwillymc.libraryprojectmpp.usecase.book.AddBookUseCase;
+import com.cesarwillymc.libraryprojectmpp.usecase.book.GetAllBooksUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.member.AddMemberUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.member.GetAllMembersUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.member.GetMemberByIdUseCase;
@@ -56,5 +61,17 @@ public class DIControllers {
         var useCase2 = new GetMemberRecordByUserIdUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
 
         return new DetailMemberController(useCase,useCase2);
+    }
+    public static BookController createBookController(){
+        var dao = new DataAccessFacade();
+        var useCase = new GetAllBooksUseCase(BookFactoryDataSource.getBookDataSource(dao));
+
+        return new BookController(useCase);
+    }
+    public static AddBookController createAddBookController(){
+        var dao = new DataAccessFacade();
+        var useCase = new AddBookUseCase(BookFactoryDataSource.getBookDataSource(dao));
+
+        return new AddBookController(useCase);
     }
 }

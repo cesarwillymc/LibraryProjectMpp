@@ -25,7 +25,7 @@ public class AddMemberRecordUseCase extends UseCaseParams<MemberRecordParams, Re
                 new MemberRecord(
                         PATH + System.currentTimeMillis(),
                         data.libraryMember(),
-                        data.book(),
+                        data.book().getNextAvailableCopy(),
                         LocalDate.now(),
                         endDate,
                         null

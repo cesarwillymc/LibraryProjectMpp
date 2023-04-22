@@ -11,17 +11,17 @@ import java.io.Serializable;
 final public class BookCopy implements Serializable {
 	
 	private static final long serialVersionUID = -63976228084869815L;
-	private Book book;
+	private String isbn;
 	private int copyNum;
 	private boolean isAvailable;
-	public BookCopy(Book book, int copyNum, boolean isAvailable) {
-		this.book = book;
+	public BookCopy(String isbn, int copyNum, boolean isAvailable) {
+		this.isbn = isbn;
 		this.copyNum = copyNum;
 		this.isAvailable = isAvailable;
 	}
 	
-	public BookCopy(Book book, int copyNum) {
-		this.book = book;
+	public BookCopy(String isbn, int copyNum) {
+		this.isbn = isbn;
 		this.copyNum = copyNum;
 	}
 	
@@ -34,8 +34,8 @@ final public class BookCopy implements Serializable {
 		return copyNum;
 	}
 	
-	public Book getBook() {
-		return book;
+	public String getBookISBN() {
+		return isbn;
 	}
 	
 	public void changeAvailability() {
@@ -47,7 +47,7 @@ final public class BookCopy implements Serializable {
 		if(ob == null) return false;
 		if(!(ob instanceof BookCopy)) return false;
 		BookCopy copy = (BookCopy)ob;
-		return copy.book.getIsbn().equals(book.getIsbn()) && copy.copyNum == copyNum;
+		return copy.isbn.equals(getBookISBN()) && copy.copyNum == copyNum;
 	}
 	
 }

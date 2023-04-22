@@ -43,6 +43,7 @@ public class DetailMemberScreen extends Stage {
     }
 
     public void setStage(Stage previusStage, String id) {
+        setTitle("Detail member "+id);
         this.previusStage = previusStage;
         box = new VBox();
 

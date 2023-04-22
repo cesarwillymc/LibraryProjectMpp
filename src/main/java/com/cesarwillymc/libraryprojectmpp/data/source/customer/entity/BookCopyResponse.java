@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 @EntityData
 public record BookCopyResponse(
-        BookResponse book,
+        String isbn,
         int copyNum,
         boolean isAvailable
 ) implements Serializable {

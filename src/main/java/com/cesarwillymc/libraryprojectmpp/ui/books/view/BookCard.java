@@ -28,7 +28,7 @@ public class BookCard extends VBox {
         setAlignment(Pos.CENTER_LEFT);
         setPadding(new Insets(10));
         setSpacing(10);
-        setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;");
+      //  setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;");
 
         // Add card content
         Label titleLabel = new Label(title);
