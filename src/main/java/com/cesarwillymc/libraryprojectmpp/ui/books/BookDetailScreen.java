@@ -111,7 +111,7 @@ public class BookDetailScreen extends Stage {
                     int copiesToAdd = Integer.parseInt(copyToAddField.getText());
                     book.addCopies(copiesToAdd);
                     controller.updateNumOfCopies(book).apply(s -> {
-                        numOfCopiesLabelAvailable.setText("Number of Copies Available: " + book.getTotalBookAvailable() + 1);
+                        numOfCopiesLabel.setText("Number of Copies: " + book.getCopies().length);
                     }, e -> {
                         new DialogError("Error", "Add num of copies failed");
                     });
@@ -223,6 +223,7 @@ public class BookDetailScreen extends Stage {
 
     void changeStateDelivered(ParamsTable paramsTable) {
         controller.updateMemberRecord(paramsTable.getIdCheckOut()).apply(x -> {
+            numOfCopiesLabelAvailable.setText("Number of Copies Available: " + book.getTotalBookAvailable() + 1);
             onLoadTable();
         }, e -> {
             new DialogError("Error", e.getMessage());

@@ -97,7 +97,7 @@ public class DIControllers {
         var dao = new DataAccessFacade();
         var useCase = new GetMemberByIdUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
         var useCase2 = new GetBookByIdUseCase(BookFactoryDataSource.getBookDataSource(dao));
-        var useCase3 = new AddMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao), bookDataSource);
+        var useCase3 = new AddMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao), BookFactoryDataSource.getBookDataSource(dao));
 
         return new CheckoutController(useCase, useCase2, useCase3);
     }
