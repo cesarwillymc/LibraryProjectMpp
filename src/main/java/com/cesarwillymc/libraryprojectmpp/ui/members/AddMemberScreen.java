@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class AddMemberScreen extends Stage {
-    public static AddMemberScreen INSTANCE = new AddMemberScreen();
+    public static final AddMemberScreen INSTANCE = new AddMemberScreen();
     private TextField firstNameField;
     private TextField lastNameField;
     private TextField telephoneField;
@@ -24,11 +24,9 @@ public class AddMemberScreen extends Stage {
     private TextField stateField;
     private TextField zipCodeField;
     private TextField documentField;
-    private Button backButton;
-    private Button saveButton;
-    HomeScreen previusStage;
+    HomeScreen previousStage;
 
-    AddMemberController controller = DIControllers.createAddMemberController();
+    final AddMemberController controller = DIControllers.createAddMemberController();
 
     AddMemberScreen() {
 
@@ -36,7 +34,7 @@ public class AddMemberScreen extends Stage {
 
     public void setStage(HomeScreen previusStage) {
         setTitle("Add Member");
-        this.previusStage = previusStage;
+        this.previousStage = previusStage;
         // Create labels
         Label documentLabel = new Label("Number document:");
         Label firstNameLabel = new Label("First Name:");
@@ -58,12 +56,12 @@ public class AddMemberScreen extends Stage {
         stateField = new TextField();
 
         // Create the back button
-        backButton = new Button("Return to previous screen");
+        Button backButton = new Button("Return to previous screen");
         backButton.setOnAction(e -> {
             close();
             previusStage.show();
         });
-        saveButton = new Button("Save Library");
+        Button saveButton = new Button("Save Library");
         saveButton.setPadding(new Insets(10));
         saveButton.setOnAction(event -> {
             if (isValidationFields()) {

@@ -1,17 +1,16 @@
 package com.cesarwillymc.libraryprojectmpp.ui.books.view;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import com.cesarwillymc.libraryprojectmpp.domain.entities.Book;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+import java.time.format.DateTimeFormatter;
+
 public class BookCard extends VBox {
 
-    Book book;
+    final Book book;
     public BookCard(Book book) {
         this.book = book;
         // Set up card layout

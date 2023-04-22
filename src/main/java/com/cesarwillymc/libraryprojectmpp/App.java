@@ -14,7 +14,7 @@ import javafx.util.Duration;
 
 public class App extends Application {
     private Stage primaryStage;
-    private AppController appController = AppDI.createAppController();
+    private final AppController appController = AppDI.createAppController();
 
     @Override
     public void start(Stage stage) throws Exception {

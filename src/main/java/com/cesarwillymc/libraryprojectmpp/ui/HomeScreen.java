@@ -16,52 +16,46 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class HomeScreen extends Stage {
-    public static HomeScreen INSTANCE = new HomeScreen();
-    private Menu menu;
-    private DashboardView dashboardView;
-    private BookView bookView;
-    private MemberView memberView;
-    private ProfileView profileView;
-    private CheckoutBookView checkoutBookView;
+    public static final HomeScreen INSTANCE = new HomeScreen();
     private Stage primaryStage;
 
     public void setStage(Stage stage) {
         primaryStage = stage;
         // Create instances of all the views
-        dashboardView = new DashboardView();
-        bookView = new BookView(()->{
+        DashboardView dashboardView = new DashboardView();
+        BookView bookView = new BookView(() -> {
 
             var addBookScreen = AddBookScreen.INSTANCE;
             hide();
             addBookScreen.setStage(this);
             addBookScreen.show();
-        },(s)->{
+        }, (s) -> {
 
             var bookDetailScreen = BookDetailScreen.INSTANCE;
             hide();
-            bookDetailScreen.setStage(this,s);
+            bookDetailScreen.setStage(this, s);
             bookDetailScreen.show();
         });
-        memberView = new MemberView(()->{
+        MemberView memberView = new MemberView(() -> {
             var addMemberScreen = AddMemberScreen.INSTANCE;
             hide();
             addMemberScreen.setStage(this);
             addMemberScreen.show();
-        }, (S)->{
+        }, (S) -> {
             var detailMember = DetailMemberScreen.INSTANCE;
             hide();
-            detailMember.setStage(this,S);
+            detailMember.setStage(this, S);
             detailMember.show();
         });
-        profileView = new ProfileView(()->{
+        ProfileView profileView = new ProfileView(() -> {
             close();
             var login = LoginScreen.INSTANCE;
             login.setStage(primaryStage);
             login.show();
         });
 
-        checkoutBookView = new CheckoutBookView();
-        menu = new Menu(dashboardView, bookView, memberView, profileView, checkoutBookView);
+        CheckoutBookView checkoutBookView = new CheckoutBookView();
+        Menu menu = new Menu(dashboardView, bookView, memberView, profileView, checkoutBookView);
 
         menu.switchToDashboard();
 

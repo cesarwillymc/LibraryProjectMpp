@@ -2,6 +2,7 @@ package com.cesarwillymc.libraryprojectmpp.domain.entities;
 
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityDomain;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -10,12 +11,15 @@ import java.io.Serializable;
 @EntityDomain
 final public class BookCopy implements Serializable {
 	
+	@Serial
 	private static final long serialVersionUID = -63976228084869815L;
-	private String isbn;
-	private int copyNum;
+	private final String isbn;
+	private String name;
+	private final int copyNum;
 	private boolean isAvailable;
-	public BookCopy(String isbn, int copyNum, boolean isAvailable) {
+	public BookCopy(String isbn,String name, int copyNum, boolean isAvailable) {
 		this.isbn = isbn;
+		this.name = name;
 		this.copyNum = copyNum;
 		this.isAvailable = isAvailable;
 	}
@@ -24,8 +28,15 @@ final public class BookCopy implements Serializable {
 		this.isbn = isbn;
 		this.copyNum = copyNum;
 	}
-	
-	
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public String getName() {
+		return name;
+	}
+
 	public boolean isAvailable() {
 		return isAvailable;
 	}
@@ -45,8 +56,7 @@ final public class BookCopy implements Serializable {
 	@Override
 	public boolean equals(Object ob) {
 		if(ob == null) return false;
-		if(!(ob instanceof BookCopy)) return false;
-		BookCopy copy = (BookCopy)ob;
+		if(!(ob instanceof BookCopy copy)) return false;
 		return copy.isbn.equals(getBookISBN()) && copy.copyNum == copyNum;
 	}
 	

@@ -5,9 +5,9 @@ import com.cesarwillymc.libraryprojectmpp.domain.enums.TypeStatusReturnBook;
 import java.time.LocalDate;
 
 public class MemberRecord {
-    private String id;
-    private LibraryMember memberResponse;
-    private BookCopy book;
+    private final String id;
+    private final LibraryMember memberResponse;
+    private final BookCopy book;
     private LocalDate dateBorrow;
     private LocalDate dateDue;
     private LocalDate dateReturned;

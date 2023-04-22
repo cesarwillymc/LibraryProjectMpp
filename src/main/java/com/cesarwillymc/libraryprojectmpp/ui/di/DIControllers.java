@@ -8,6 +8,7 @@ import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.MemberRecordF
 import com.cesarwillymc.libraryprojectmpp.ui.books.controller.AddBookController;
 import com.cesarwillymc.libraryprojectmpp.ui.books.controller.BookController;
 import com.cesarwillymc.libraryprojectmpp.ui.books.controller.BookDetailController;
+import com.cesarwillymc.libraryprojectmpp.ui.checkoutBook.controller.CheckoutController;
 import com.cesarwillymc.libraryprojectmpp.ui.home.controller.HomeController;
 import com.cesarwillymc.libraryprojectmpp.ui.login.controller.LoginController;
 import com.cesarwillymc.libraryprojectmpp.ui.login.controller.LoginControllerImpl;
@@ -17,13 +18,12 @@ import com.cesarwillymc.libraryprojectmpp.ui.members.controller.MemberController
 import com.cesarwillymc.libraryprojectmpp.ui.profile.controller.ProfileController;
 import com.cesarwillymc.libraryprojectmpp.usecase.book.AddBookUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.book.GetAllBooksUseCase;
+import com.cesarwillymc.libraryprojectmpp.usecase.book.GetBookByIdUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.book.UpdateBookUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.member.AddMemberUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.member.GetAllMembersUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.member.GetMemberByIdUseCase;
-import com.cesarwillymc.libraryprojectmpp.usecase.memberRecord.GetAllMembersRecordUseCase;
-import com.cesarwillymc.libraryprojectmpp.usecase.memberRecord.GetMemberRecordByBookIdUseCase;
-import com.cesarwillymc.libraryprojectmpp.usecase.memberRecord.GetMemberRecordByUserIdUseCase;
+import com.cesarwillymc.libraryprojectmpp.usecase.memberRecord.*;
 import com.cesarwillymc.libraryprojectmpp.usecase.user.GetUserLoggedUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.user.SignInUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.user.SignOutUseCase;
@@ -62,8 +62,8 @@ public class DIControllers {
         var dao = new DataAccessFacade();
         var useCase = new GetMemberByIdUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
         var useCase2 = new GetMemberRecordByUserIdUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
-
-        return new DetailMemberController(useCase,useCase2);
+        var useCase3 = new UpdateMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
+        return new DetailMemberController(useCase,useCase2,useCase3);
     }
     public static BookController createBookController(){
         var dao = new DataAccessFacade();
@@ -82,7 +82,16 @@ public class DIControllers {
         var dao = new DataAccessFacade();
         var useCase = new UpdateBookUseCase(BookFactoryDataSource.getBookDataSource(dao));
         var useCase2 = new GetMemberRecordByBookIdUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
+        var useCase3 = new UpdateMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
 
-        return new BookDetailController(useCase,useCase2);
+        return new BookDetailController(useCase,useCase2,useCase3);
+    }
+    public static CheckoutController createCheckoutController(){
+        var dao = new DataAccessFacade();
+        var useCase = new GetMemberByIdUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
+        var useCase2 = new GetBookByIdUseCase(BookFactoryDataSource.getBookDataSource(dao));
+        var useCase3 = new AddMemberRecordUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
+
+        return new CheckoutController(useCase,useCase2,useCase3);
     }
 }

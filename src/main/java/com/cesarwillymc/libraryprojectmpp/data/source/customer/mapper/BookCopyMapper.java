@@ -10,6 +10,7 @@ public class BookCopyMapper {
     public BookCopyResponse domainToData(BookCopy data) {
         return new BookCopyResponse(
                 data.getBookISBN(),
+                data.getName(),
                 data.getCopyNum(),
                 data.isAvailable()
         );
@@ -19,6 +20,7 @@ public class BookCopyMapper {
     public BookCopy dataToDomain(BookCopyResponse data) {
         return new BookCopy(
                 data.isbn(),
+                data.name(),
                 data.copyNum(),
                 data.isAvailable()
         );

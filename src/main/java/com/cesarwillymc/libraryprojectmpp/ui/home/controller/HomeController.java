@@ -3,18 +3,15 @@ package com.cesarwillymc.libraryprojectmpp.ui.home.controller;
 
 import com.cesarwillymc.libraryprojectmpp.domain.entities.MemberRecord;
 import com.cesarwillymc.libraryprojectmpp.domain.enums.TypeStatusReturnBook;
-import com.cesarwillymc.libraryprojectmpp.usecase.book.GetAllBooksUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.member.GetAllMembersUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.memberRecord.GetAllMembersRecordUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 
-import java.util.function.BiConsumer;
-
 public class HomeController {
-    GetAllMembersUseCase getAllMembersUseCase;
-    GetAllMembersRecordUseCase getAllMembersRecordUseCase;
+    final GetAllMembersUseCase getAllMembersUseCase;
+    final GetAllMembersRecordUseCase getAllMembersRecordUseCase;
 
     public HomeController(GetAllMembersUseCase getAllMembersUseCase, GetAllMembersRecordUseCase getAllMembersRecordUseCase) {
         this.getAllMembersUseCase = getAllMembersUseCase;

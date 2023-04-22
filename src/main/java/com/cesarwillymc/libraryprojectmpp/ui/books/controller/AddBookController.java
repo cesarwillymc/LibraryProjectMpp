@@ -8,7 +8,7 @@ import com.cesarwillymc.libraryprojectmpp.usecase.book.AddBookUseCase;
 import java.util.List;
 
 public class AddBookController {
-    AddBookUseCase addBookUseCase;
+    final AddBookUseCase addBookUseCase;
 
     public AddBookController(AddBookUseCase addBookUseCase) {
         this.addBookUseCase = addBookUseCase;

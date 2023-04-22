@@ -1,9 +1,11 @@
 package com.cesarwillymc.libraryprojectmpp.domain.exception;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class LibrarySystemException extends Exception implements Serializable {
 	
+	@Serial
 	private static final long serialVersionUID = 3326915348398932420L;
 	public LibrarySystemException() {
 		super();

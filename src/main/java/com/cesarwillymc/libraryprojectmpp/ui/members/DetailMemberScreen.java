@@ -1,8 +1,10 @@
 package com.cesarwillymc.libraryprojectmpp.ui.members;
 
-import com.cesarwillymc.libraryprojectmpp.domain.entities.MemberRecord;
+import com.cesarwillymc.libraryprojectmpp.domain.enums.TypeStatusReturnBook;
 import com.cesarwillymc.libraryprojectmpp.ui.di.DIControllers;
 import com.cesarwillymc.libraryprojectmpp.ui.members.controller.DetailMemberController;
+import com.cesarwillymc.libraryprojectmpp.ui.members.entity.LibraryMemberUI;
+import com.cesarwillymc.libraryprojectmpp.ui.members.entity.ParamsTable;
 import com.cesarwillymc.libraryprojectmpp.ui.view.DialogError;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,13 +17,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.time.LocalDate;
 
 public class DetailMemberScreen extends Stage {
-    public static DetailMemberScreen INSTANCE = new DetailMemberScreen();
+    public static final DetailMemberScreen INSTANCE = new DetailMemberScreen();
 
     private final Label firstNameLabel = new Label("First Name:");
     private final Label lastNameLabel = new Label("Last Name:");
@@ -32,21 +34,22 @@ public class DetailMemberScreen extends Stage {
     private final Label lastNameValue = new Label();
     private final Label telephoneValue = new Label();
     private final Label addressValue = new Label();
-    private VBox box;
-    private TableView<MemberRecord> tableView = new TableView<>();
+    private TableView<LibraryMemberUI> tableView;
     Stage previusStage;
 
-    DetailMemberController controller = DIControllers.createDetailMemberController();
+    final DetailMemberController controller = DIControllers.createDetailMemberController();
+    String id;
 
     DetailMemberScreen() {
 
     }
 
     public void setStage(Stage previusStage, String id) {
-        setTitle("Detail member "+id);
+        this.id = id;
+        setTitle("Detail member " + id);
         this.previusStage = previusStage;
-        box = new VBox();
-
+        VBox box = new VBox();
+        tableView = createTableView();
         controller.getUserById(id).apply(s -> {
             firstNameValue.setText(s.getFirstName());
             lastNameValue.setText(s.getLastName());
@@ -74,75 +77,119 @@ public class DetailMemberScreen extends Stage {
         addressBox.setPadding(new Insets(10));
         box.getChildren().addAll(backButton, new ImageView(defaultPhoto), firstNameBox, lastNameBox, telephoneBox, addressBox);
 
-        // Set up table columns
-        TableColumn<MemberRecord, String> idColumn = new TableColumn<>("ID");
-        TableColumn<MemberRecord, String> bookColumn = new TableColumn<>("Book");
-        TableColumn<MemberRecord, LocalDate> borrowColumn = new TableColumn<>("Date Borrowed");
-        TableColumn<MemberRecord, LocalDate> dueColumn = new TableColumn<>("Due Date");
-        TableColumn<MemberRecord, LocalDate> returnedColumn = new TableColumn<>("Date Returned");
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        bookColumn.setCellValueFactory(new PropertyValueFactory<>("Book"));
-        borrowColumn.setCellValueFactory(new PropertyValueFactory<>("dateBorrow"));
-        dueColumn.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
-        returnedColumn.setCellValueFactory(new PropertyValueFactory<>("dateReturned"));
-
-        // Highlight "date returned" column based on current date
-        LocalDate currentDate = LocalDate.now();
-        returnedColumn.setCellFactory(new Callback<>() {
-            @Override
-            public TableCell<MemberRecord, LocalDate> call(TableColumn<MemberRecord, LocalDate> column) {
-                return new TableCell<>() {
-                    @Override
-                    protected void updateItem(LocalDate date, boolean empty) {
-                        super.updateItem(date, empty);
-                        if (empty || date == null) {
-                            setText("");
-                            setStyle("");
-                            return;
-                        }
-                        setText(date.toString());
-                        if (date.isBefore(currentDate)) {
-                            setTextFill(Color.RED);
-                        } else {
-                            setTextFill(Color.GREEN);
-                        }
-                    }
-                };
-            }
-        });
-
-        tableView.getColumns().addAll(idColumn, bookColumn, borrowColumn, dueColumn, returnedColumn);
         box.getChildren().add(tableView);
         Scene scene = new Scene(box, 800, 600);
         setScene(scene);
         show();
 
+        onLoadTable();
+
+    }
+
+    private void onLoadTable() {
         controller.getRecordMembers(id).apply(s -> {
-            setMemberRecords(FXCollections.observableList(s));
+
+            var listMapper = s.stream().map(x -> new LibraryMemberUI(
+                    x.getBook().getCopyNum(),
+                    x.getBook().getName(),
+                    x.getBook().getBookISBN(),
+                    x.getDateBorrow(),
+                    x.getDateDue(),
+                    x.getDateReturned(),
+                    LibraryMemberUI.getColor(x.getStatusReturnBook()),
+                    x.getStatusReturnBook(),
+                    x.getId()
+            )).toList();
+            setMemberRecords(FXCollections.observableList(listMapper));
         }, e -> {
 
         });
-
     }
 
-    public void setFirstName(String firstName) {
-        firstNameValue.setText(firstName);
+    @SuppressWarnings("unchecked")
+    TableView<LibraryMemberUI> createTableView() {
+        TableView<LibraryMemberUI> table = new TableView<>();
+
+        TableColumn<LibraryMemberUI, Integer> idCopyBook = new TableColumn<>("Id book");
+        idCopyBook.setCellValueFactory(new PropertyValueFactory<>("idCopyBook"));
+        TableColumn<LibraryMemberUI, String> titleCol = new TableColumn<>("Title");
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+
+        TableColumn<LibraryMemberUI, String> isbnCol = new TableColumn<>("ISBN");
+        isbnCol.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+
+        TableColumn<LibraryMemberUI, LocalDate> dateBorrowCol = new TableColumn<>("Borrow Date");
+        dateBorrowCol.setCellValueFactory(new PropertyValueFactory<>("dateBorrow"));
+
+        TableColumn<LibraryMemberUI, LocalDate> dateDueCol = new TableColumn<>("Due Date");
+        dateDueCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
+
+        TableColumn<LibraryMemberUI, LocalDate> dateReturnedCol = new TableColumn<>("Returned Date");
+        dateReturnedCol.setCellValueFactory(new PropertyValueFactory<>("dateReturned"));
+
+        TableColumn<LibraryMemberUI, Color> statusCol = new TableColumn<>("Status");
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        TableColumn<LibraryMemberUI, TypeStatusReturnBook> typeStatusCol = new TableColumn<>("Return Type");
+        typeStatusCol.setCellValueFactory(new PropertyValueFactory<>("typeStatus"));
+        TableColumn<LibraryMemberUI, ParamsTable> changeState = new TableColumn<>("Change state");
+        changeState.setCellValueFactory(new PropertyValueFactory<>("paramsTable"));
+
+        changeState.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(ParamsTable item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    if (item.getTypeStatusReturnBook() != TypeStatusReturnBook.FINISH) {
+                        Button button = new Button("Delivered");
+                        button.setOnAction(event -> {
+                            changeStateDelivered(item);
+                        });
+                        setGraphic(button);
+                    } else {
+                        setText(null);
+                        setGraphic(null);
+                    }
+
+                }
+            }
+        });
+        statusCol.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Color item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    Rectangle colorBox = new Rectangle(20, 20, item);
+                    setGraphic(colorBox);
+                }
+            }
+        });
+        table.getColumns().addAll(idCopyBook,titleCol, isbnCol, dateBorrowCol, dateDueCol, dateReturnedCol, statusCol, typeStatusCol,changeState);
+
+        return table;
     }
 
-    public void setLastName(String lastName) {
-        lastNameValue.setText(lastName);
+    void changeStateDelivered(ParamsTable paramsTable) {
+        controller.updateMemberRecord(paramsTable.getIdCheckOut()).apply(x -> {
+            onLoadTable();
+        }, e -> {
+            new DialogError("Error", e.getMessage());
+        });
     }
-
-    public void setTelephone(String telephone) {
-        telephoneValue.setText(telephone);
-    }
-
     public void setAddress(String address) {
         addressValue.setText(address);
     }
 
-    public void setMemberRecords(ObservableList<MemberRecord> memberRecords) {
+    public void setMemberRecords(ObservableList<LibraryMemberUI> memberRecords) {
         tableView.setItems(memberRecords);
     }
 

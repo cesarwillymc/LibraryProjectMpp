@@ -2,10 +2,12 @@ package com.cesarwillymc.libraryprojectmpp.domain.entities;
 
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityDomain;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @EntityDomain
 public class Person implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 3665880920647848288L;
 	private String firstName;
 	private String lastName;

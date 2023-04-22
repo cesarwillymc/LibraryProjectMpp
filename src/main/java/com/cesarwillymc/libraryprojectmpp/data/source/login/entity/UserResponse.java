@@ -5,16 +5,18 @@ import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.PersonRespo
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
 import com.cesarwillymc.libraryprojectmpp.domain.enums.TypeAuth;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @EntityData
 public class UserResponse extends PersonResponse implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1113799434508612345L;
 
-    String id;
-    String password;
-    TypeAuth authorization;
-    String imageUrl;
+    final String id;
+    final String password;
+    final TypeAuth authorization;
+    final String imageUrl;
 
     public UserResponse(String f, String l, String t, AddressResponse a, String id, String password, TypeAuth authorization, String imageUrl) {
         super(f, l, t, a);

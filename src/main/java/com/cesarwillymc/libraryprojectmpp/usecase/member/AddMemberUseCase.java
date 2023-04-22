@@ -5,8 +5,6 @@ import com.cesarwillymc.libraryprojectmpp.domain.entities.LibraryMember;
 import com.cesarwillymc.libraryprojectmpp.domain.resource.Resource;
 import com.cesarwillymc.libraryprojectmpp.usecase.util.UseCaseParams;
 
-import java.util.List;
-
 public class AddMemberUseCase extends UseCaseParams<LibraryMember, Resource<Void>> {
     final private MemberDataSource memberDataSource;
 

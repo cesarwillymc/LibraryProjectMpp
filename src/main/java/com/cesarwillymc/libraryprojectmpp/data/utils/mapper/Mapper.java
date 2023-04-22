@@ -12,9 +12,9 @@ public abstract class Mapper<@EntityDomain I, @EntityData O> {
 
     public List<O> domainToData(List<I> data){
        return data.stream().map(this::domainToData).toList();
-    };
+    }
 
     public List<I> dataToDomain(List<O> data){
        return data.stream().map(this::dataToDomain).toList();
-    };
+    }
 }

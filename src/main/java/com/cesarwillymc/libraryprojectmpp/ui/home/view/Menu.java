@@ -12,13 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 
 public class Menu {
-    private DashboardView dashboardView;
-    private BookView bookView;
-    private MemberView memberView;
-    private ProfileView profileView;
-    private CheckoutBookView checkoutBookView;
+    private final DashboardView dashboardView;
+    private final BookView bookView;
+    private final MemberView memberView;
+    private final ProfileView profileView;
+    private final CheckoutBookView checkoutBookView;
     private BorderPane root;
-    private GridPane menuItems;
     private Button dashboardButton;
     private Button bookButton;
     private Button memberButton;
@@ -36,7 +35,7 @@ public class Menu {
 
     private void createMenu() {
 
-        menuItems = new GridPane();
+        GridPane menuItems = new GridPane();
         menuItems.setAlignment(Pos.BASELINE_CENTER);
         dashboardButton = new Button("Dashboard");
         bookButton = new Button("Book");

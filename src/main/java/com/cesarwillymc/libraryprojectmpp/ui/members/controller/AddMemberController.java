@@ -6,7 +6,7 @@ import com.cesarwillymc.libraryprojectmpp.domain.resource.Resource;
 import com.cesarwillymc.libraryprojectmpp.usecase.member.AddMemberUseCase;
 
 public class AddMemberController {
-    AddMemberUseCase addMemberUseCase;
+    final AddMemberUseCase addMemberUseCase;
 
     public AddMemberController(AddMemberUseCase addMemberUseCase) {
         this.addMemberUseCase = addMemberUseCase;

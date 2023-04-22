@@ -6,7 +6,7 @@ import com.cesarwillymc.libraryprojectmpp.usecase.book.entity.SignInParams;
 import com.cesarwillymc.libraryprojectmpp.usecase.user.SignInUseCase;
 
 public class LoginControllerImpl implements LoginController {
-    private SignInUseCase signInUseCase;
+    private final SignInUseCase signInUseCase;
 
     public LoginControllerImpl(SignInUseCase signInUseCase) {
         this.signInUseCase = signInUseCase;

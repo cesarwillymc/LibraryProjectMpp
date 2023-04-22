@@ -6,8 +6,8 @@ import com.cesarwillymc.libraryprojectmpp.usecase.user.GetUserLoggedUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.user.SignOutUseCase;
 
 public class ProfileController {
-    private GetUserLoggedUseCase getUserLoggedUseCase;
-    private SignOutUseCase signOutUseCase;
+    private final GetUserLoggedUseCase getUserLoggedUseCase;
+    private final SignOutUseCase signOutUseCase;
 
     public ProfileController(GetUserLoggedUseCase getUserLoggedUseCase, SignOutUseCase signOutUseCase) {
         this.getUserLoggedUseCase = getUserLoggedUseCase;

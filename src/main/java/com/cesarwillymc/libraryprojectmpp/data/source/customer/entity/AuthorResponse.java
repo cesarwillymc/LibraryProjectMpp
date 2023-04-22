@@ -4,6 +4,7 @@ import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.Address;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.Person;
 
+import java.io.Serial;
 import java.io.Serializable;
 @EntityData
 final public class AuthorResponse extends Person implements Serializable {
@@ -18,5 +19,6 @@ final public class AuthorResponse extends Person implements Serializable {
 		this.bio = bio;
 	}
 
+	@Serial
 	private static final long serialVersionUID = 7508481940058530471L;
 }

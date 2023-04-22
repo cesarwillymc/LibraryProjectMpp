@@ -9,5 +9,7 @@ module com.cesarwillymc.libraryprojectmpp {
     requires com.almasb.fxgl.all;
 
     opens com.cesarwillymc.libraryprojectmpp to javafx.fxml;
+    opens com.cesarwillymc.libraryprojectmpp.ui.members.entity to javafx.base;
+
     exports com.cesarwillymc.libraryprojectmpp;
 }

@@ -2,14 +2,10 @@ package com.cesarwillymc.libraryprojectmpp.domain.entities;
 
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityDomain;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.IntStream;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -18,31 +14,32 @@ import java.util.stream.Stream;
 @EntityDomain
 final public class Book implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 6110690276685962829L;
     private BookCopy[] copies;
-    private List<Author> authors;
-    private String isbn;
-    private String title;
-    private LocalDate dateCreated;
-    private LocalDate dateUpdated;
+    private final List<Author> authors;
+    private final String isbn;
+    private final String title;
+    private final LocalDate dateCreated;
+    private final LocalDate dateUpdated;
 
 
     public Book(String isbn, String title, List<Author> authors) {
         this.isbn = isbn;
         this.title = title;
         this.authors = Collections.unmodifiableList(authors);
-        copies = new BookCopy[]{new BookCopy(getIsbn(), 1, true)};
-		dateCreated = LocalDate.now();
-		dateUpdated = LocalDate.now();
+        copies = new BookCopy[]{new BookCopy(getIsbn(), getTitle(), 1, true)};
+        dateCreated = LocalDate.now();
+        dateUpdated = LocalDate.now();
     }
 
     public Book(String isbn, String title, List<Author> authors, Integer numOfCopies) {
         this.isbn = isbn;
         this.title = title;
         this.authors = Collections.unmodifiableList(authors);
-        copies = Stream.iterate(1, x -> x + 1).map(x -> new BookCopy(getIsbn(), x, true)).limit(numOfCopies).toArray(BookCopy[]::new);
-		dateCreated = LocalDate.now();
-		dateUpdated = LocalDate.now();
+        copies = Stream.iterate(1, x -> x + 1).map(x -> new BookCopy(getIsbn(), getTitle(), x, true)).limit(numOfCopies).toArray(BookCopy[]::new);
+        dateCreated = LocalDate.now();
+        dateUpdated = LocalDate.now();
     }
 
     public Book(BookCopy[] copies, List<Author> authors, String isbn, String title, LocalDate dateCreated, LocalDate dateUpdated) {
@@ -74,7 +71,7 @@ final public class Book implements Serializable {
     }
 
     public void addCopies(Integer num) {
-        var copiesNew =Stream.iterate(copies.length, x -> x + 1).map(x -> new BookCopy(getIsbn(), x, true)).limit(num).toList();
+        var copiesNew = Stream.iterate(copies.length, x -> x + 1).map(x -> new BookCopy(getIsbn(), getTitle(), x, true)).limit(num).toList();
         var copyOld = new ArrayList<>(List.of(copies));
         copyOld.addAll(copiesNew);
         copies = copyOld.toArray(BookCopy[]::new);
@@ -95,7 +92,7 @@ final public class Book implements Serializable {
             return false;
         }
         return Arrays.stream(copies)
-                .map(l -> l.isAvailable())
+                .map(BookCopy::isAvailable)
                 .reduce(false, (x, y) -> x || y);
     }
 
@@ -127,8 +124,8 @@ final public class Book implements Serializable {
     public BookCopy getNextAvailableCopy() {
         Optional<BookCopy> optional
                 = Arrays.stream(copies)
-                .filter(x -> x.isAvailable()).findFirst();
-        return optional.isPresent() ? optional.get() : null;
+                .filter(BookCopy::isAvailable).findFirst();
+        return optional.orElse(null);
     }
 
     public BookCopy getCopy(int copyNum) {

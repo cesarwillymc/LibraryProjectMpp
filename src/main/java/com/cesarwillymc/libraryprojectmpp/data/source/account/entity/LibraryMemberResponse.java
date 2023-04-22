@@ -2,10 +2,12 @@ package com.cesarwillymc.libraryprojectmpp.data.source.account.entity;
 
 import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @EntityData
 final public class LibraryMemberResponse extends PersonResponse implements Serializable {
+    @Serial
     private static final long serialVersionUID = 111379943451898769L;
     private final String memberId;
 

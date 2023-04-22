@@ -2,14 +2,13 @@ package com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.mapper;
 
 import com.cesarwillymc.libraryprojectmpp.data.source.account.mapper.MemberMapper;
 import com.cesarwillymc.libraryprojectmpp.data.source.customer.mapper.BookCopyMapper;
-import com.cesarwillymc.libraryprojectmpp.data.source.customer.mapper.BookDataMapper;
 import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.entity.MemberRecordResponse;
 import com.cesarwillymc.libraryprojectmpp.data.utils.mapper.Mapper;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.MemberRecord;
 
 public class MemberRecordMapper extends Mapper<MemberRecord, MemberRecordResponse> {
-    private BookCopyMapper bookDataMapper;
-    private MemberMapper memberMapper;
+    private final BookCopyMapper bookDataMapper;
+    private final MemberMapper memberMapper;
 
     public MemberRecordMapper(BookCopyMapper bookDataMapper, MemberMapper memberMapper) {
         this.bookDataMapper = bookDataMapper;

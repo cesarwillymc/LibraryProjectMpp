@@ -18,8 +18,8 @@ import javafx.scene.text.Text;
 
 public class ProfileView implements View {
     private final Node node;
-    BorderPane root;
-    ProfileController profileController = DIControllers.createProfileController();
+    final BorderPane root;
+    final ProfileController profileController = DIControllers.createProfileController();
 
     public ProfileView(Runnable navigate) {
         // Create chart nodes and add them to a parent node
@@ -83,7 +83,7 @@ public class ProfileView implements View {
 
         // Create name and telephone labels
         Text name = new Text(user.getFirstName() + " " + user.getLastName());
-        Text telephoneLabel = new Text("Telephone: " + user.getLastName());
+        Text telephoneLabel = new Text("Telephone: " + user.getTelephone());
 
         profileInfo.getChildren().addAll(imageContainer, name, telephoneLabel);
 

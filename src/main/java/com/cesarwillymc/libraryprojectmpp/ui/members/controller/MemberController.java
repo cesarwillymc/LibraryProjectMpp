@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class MemberController {
 
-    GetAllMembersUseCase getAllMembersUseCase;
+    final GetAllMembersUseCase getAllMembersUseCase;
     private List<LibraryMember> members;
 
     public MemberController(GetAllMembersUseCase getAllMembersUseCase) {
@@ -24,9 +24,7 @@ public class MemberController {
         getAllMembersUseCase.run().apply(x -> {
             members = x;
             data.accept(members.stream().map(this::from).collect(Collectors.toList()));
-        }, e -> {
-            members = new ArrayList<>();
-        });
+        }, e -> members = new ArrayList<>());
     }
 
     public void filterByName(boolean isReverse, Consumer<List<MemberCard>> data) {

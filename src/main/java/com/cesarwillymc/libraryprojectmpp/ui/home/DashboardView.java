@@ -3,32 +3,20 @@ package com.cesarwillymc.libraryprojectmpp.ui.home;
 import com.almasb.fxgl.core.View;
 import com.cesarwillymc.libraryprojectmpp.ui.di.DIControllers;
 import com.cesarwillymc.libraryprojectmpp.ui.home.controller.HomeController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class DashboardView implements View {
     private final Node node;
-    private HomeController homeController = DIControllers.createHomeController();
 
     public DashboardView() {
-        // Create chart nodes and add them to a parent node
-        // create data for first chart
+        HomeController homeController = DIControllers.createHomeController();
         var booksAndStatus = homeController.getDataForBooksAndStatus();
         var membersAndHistory = homeController.getDataForMembersAndHistory();
         // create first chart
         PieChart chart1 = new PieChart(booksAndStatus);
         chart1.setTitle("Books and Status");
-
-        // create data for second chart
 
         // create second chart
         PieChart chart2 = new PieChart(membersAndHistory);

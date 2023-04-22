@@ -18,13 +18,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LoginScreen extends Stage {
-    public static LoginScreen INSTANCE = new LoginScreen();
+    public static final LoginScreen INSTANCE = new LoginScreen();
     private TextField usernameTextField;
     private PasswordField passwordField;
     private Text errorText;
     private Stage primaryStage;
 
-    private LoginController controller;
+    private final LoginController controller;
 
     private LoginScreen() {
         controller = DIControllers.createLoginController();

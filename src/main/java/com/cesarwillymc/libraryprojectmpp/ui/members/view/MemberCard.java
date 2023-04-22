@@ -6,15 +6,9 @@ import javafx.scene.layout.StackPane;
 
 public class MemberCard extends StackPane {
 
-    private String firstName;
-    private String lastName;
-    private String telephone;
-    private String memberId;
+    private final String memberId;
 
     public MemberCard(String firstName, String lastName, String telephone, String memberId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.telephone = telephone;
         this.memberId = memberId;
 
         // Create labels for member information

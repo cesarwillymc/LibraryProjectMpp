@@ -1,6 +1,5 @@
 package com.cesarwillymc.libraryprojectmpp.data.source.memberRecord;
 
-import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.entity.MemberRecordResponse;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.MemberRecord;
 import com.cesarwillymc.libraryprojectmpp.domain.resource.Resource;
 
@@ -15,5 +14,7 @@ public interface MemberRecordDataSource {
     Resource<List<MemberRecord>> getMembersRecordsByUserId(String id);
 
     Resource<List<MemberRecord>> getMembersRecordByBookId(String id);
+    Resource<MemberRecord> getMembersRecordById(String id);
+
     Resource<List<MemberRecord>> getAllMemberRecord();
 }

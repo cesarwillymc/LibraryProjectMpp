@@ -4,7 +4,6 @@ import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.MemberRecordD
 import com.cesarwillymc.libraryprojectmpp.domain.entities.MemberRecord;
 import com.cesarwillymc.libraryprojectmpp.domain.resource.Resource;
 import com.cesarwillymc.libraryprojectmpp.usecase.util.UseCaseNoParams;
-import com.cesarwillymc.libraryprojectmpp.usecase.util.UseCaseParams;
 
 import java.util.List;
 

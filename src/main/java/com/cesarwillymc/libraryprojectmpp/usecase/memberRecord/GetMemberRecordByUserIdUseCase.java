@@ -5,7 +5,6 @@ import com.cesarwillymc.libraryprojectmpp.domain.entities.MemberRecord;
 import com.cesarwillymc.libraryprojectmpp.domain.resource.Resource;
 import com.cesarwillymc.libraryprojectmpp.usecase.util.UseCaseParams;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class GetMemberRecordByUserIdUseCase extends UseCaseParams<String, Resource<List<MemberRecord>>> {

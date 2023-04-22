@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class BookController {
 
-    GetAllBooksUseCase allBooksUseCase;
+    final GetAllBooksUseCase allBooksUseCase;
     private List<Book> books;
 
     public BookController(GetAllBooksUseCase allBooksUseCase) {
@@ -24,9 +24,7 @@ public class BookController {
         allBooksUseCase.run().apply(x -> {
             books = x;
             data.accept(books.stream().map(this::from).collect(Collectors.toList()));
-        }, e -> {
-            books = new ArrayList<>();
-        });
+        }, e -> books = new ArrayList<>());
     }
 
     public void filterByTitle(boolean isReverse, Consumer<List<BookCard>> data) {

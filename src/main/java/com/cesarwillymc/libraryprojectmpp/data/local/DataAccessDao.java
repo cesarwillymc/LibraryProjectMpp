@@ -5,11 +5,8 @@ import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.LibraryMemb
 import com.cesarwillymc.libraryprojectmpp.data.source.customer.entity.BookResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.login.entity.UserResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.entity.MemberRecordResponse;
-import com.cesarwillymc.libraryprojectmpp.domain.entities.MemberRecord;
-import com.cesarwillymc.libraryprojectmpp.domain.entities.User;
 import com.cesarwillymc.libraryprojectmpp.domain.exception.LibrarySystemException;
 import com.cesarwillymc.libraryprojectmpp.domain.exception.LoginException;
-import com.cesarwillymc.libraryprojectmpp.domain.resource.Resource;
 
 import java.util.List;
 

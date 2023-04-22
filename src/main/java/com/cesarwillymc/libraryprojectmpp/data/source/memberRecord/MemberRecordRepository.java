@@ -1,7 +1,6 @@
 package com.cesarwillymc.libraryprojectmpp.data.source.memberRecord;
 
 import com.cesarwillymc.libraryprojectmpp.data.local.DataAccessDao;
-import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.entity.MemberRecordResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.mapper.MemberRecordMapper;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.MemberRecord;
 import com.cesarwillymc.libraryprojectmpp.domain.resource.Resource;
@@ -53,6 +52,16 @@ public class MemberRecordRepository implements MemberRecordDataSource {
         try {
             var data = dataAccess.getAllMembersRecord().stream().filter(x -> x.book().isbn().equals(id)).toList();
             return Resource.Sucess(mapper.dataToDomain(data));
+        } catch (Exception e) {
+            return Resource.Error(e);
+        }
+    }
+
+    @Override
+    public Resource<MemberRecord> getMembersRecordById(String id) {
+        try {
+            var data = dataAccess.getAllMembersRecord().stream().filter(x -> x.id().equals(id)).findFirst();
+            return Resource.Sucess(mapper.dataToDomain(data.get()));
         } catch (Exception e) {
             return Resource.Error(e);
         }

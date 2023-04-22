@@ -5,7 +5,7 @@ import com.cesarwillymc.libraryprojectmpp.data.utils.mapper.Mapper;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.LibraryMember;
 
 public class MemberMapper extends Mapper<LibraryMember, LibraryMemberResponse> {
-    private AddressMapper addressMapper;
+    private final AddressMapper addressMapper;
 
     public MemberMapper(AddressMapper addressMapper) {
         this.addressMapper = addressMapper;

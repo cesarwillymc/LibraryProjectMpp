@@ -20,16 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddBookScreen extends Stage {
-    public static AddBookScreen INSTANCE = new AddBookScreen();
+    public static final AddBookScreen INSTANCE = new AddBookScreen();
 
     private TextField isbnField;
     private TextField titleField;
     private List<Author> authors;
     private TextField numOfCopiesField;
     Stage previusStage;
-    ListView<Author> listView = new ListView<>();
+    final ListView<Author> listView = new ListView<>();
 
-    AddBookController controller= DIControllers.createAddBookController();
+    final AddBookController controller= DIControllers.createAddBookController();
     public void setStage(Stage stage) {
         setTitle("Add Author");
         listView.setPrefHeight(100);

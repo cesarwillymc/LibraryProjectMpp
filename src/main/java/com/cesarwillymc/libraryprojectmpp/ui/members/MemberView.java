@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 
 public class MemberView implements View {
     private final Node node;
-    private MemberController memberController = DIControllers.createMemberController();
+    private final MemberController memberController = DIControllers.createMemberController();
 
     public MemberView(Runnable navigateAddMember, Consumer<String> navigateDetailMember) {
         ListView<MemberCard> cardList = new ListView<>(FXCollections.observableArrayList());
@@ -45,19 +45,15 @@ public class MemberView implements View {
 
         Button searchButton = new Button("Search");
         Button reload = new Button("Reload List");
-        reload.setOnAction(event -> {
-            memberController.getInitialListMembers((x) -> {
-                cardList.setItems(FXCollections.observableArrayList(x));
-                cardList.refresh();
-            });
-        });
+        reload.setOnAction(event -> memberController.getInitialListMembers((x) -> {
+            cardList.setItems(FXCollections.observableArrayList(x));
+            cardList.refresh();
+        }));
         Button addNewMemberButton = new Button("Add New Member Library");
-        searchButton.setOnAction(event -> {
-            memberController.searchInList(searchField.getText(), (x) -> {
-                cardList.setItems(FXCollections.observableArrayList(x));
-                cardList.refresh();
-            });
-        });
+        searchButton.setOnAction(event -> memberController.searchInList(searchField.getText(), (x) -> {
+            cardList.setItems(FXCollections.observableArrayList(x));
+            cardList.refresh();
+        }));
         addNewMemberButton.setOnAction(event -> navigateAddMember.run());
         HBox searchControls = new HBox(searchField, searchButton, reload, addNewMemberButton);
         searchControls.setAlignment(Pos.CENTER_LEFT);
@@ -69,32 +65,24 @@ public class MemberView implements View {
         filterBox.setSpacing(10);
         searchBox.getChildren().add(filterBox);
 
-        ButtonCard filter1 = new ButtonCard("Name",(b)->{
-            memberController.filterByName(b, (x) -> {
-                cardList.setItems(FXCollections.observableArrayList(x));
-                cardList.refresh();
-            });
-        });
-        ButtonCard filter2 = new ButtonCard("Id",(b)->{
-            memberController.filterById(b, (x) -> {
-                cardList.setItems(FXCollections.observableArrayList(x));
-                cardList.refresh();
-            });
-        });
-        ButtonCard filter3 = new ButtonCard("Telephone",(b)->{
-            memberController.filterByTelephone(b, (x) -> {
-                cardList.setItems(FXCollections.observableArrayList(x));
-                cardList.refresh();
-            });
-        });
+        ButtonCard filter1 = new ButtonCard("Name", (b) -> memberController.filterByName(b, (x) -> {
+            cardList.setItems(FXCollections.observableArrayList(x));
+            cardList.refresh();
+        }));
+        ButtonCard filter2 = new ButtonCard("Id", (b) -> memberController.filterById(b, (x) -> {
+            cardList.setItems(FXCollections.observableArrayList(x));
+            cardList.refresh();
+        }));
+        ButtonCard filter3 = new ButtonCard("Telephone", (b) -> memberController.filterByTelephone(b, (x) -> {
+            cardList.setItems(FXCollections.observableArrayList(x));
+            cardList.refresh();
+        }));
         Button clearFilter = new Button("Clear filters");
 
-        clearFilter.setOnAction(event -> {
-            memberController.cleanFilter((x) -> {
-                cardList.setItems(FXCollections.observableArrayList(x));
-                cardList.refresh();
-            });
-        });
+        clearFilter.setOnAction(event -> memberController.cleanFilter((x) -> {
+            cardList.setItems(FXCollections.observableArrayList(x));
+            cardList.refresh();
+        }));
 
         filterBox.getChildren().addAll(new Label("Filters: "), filter1, filter2, filter3, clearFilter);
         filterBox.setPadding(new Insets(10));

@@ -4,7 +4,6 @@ import com.cesarwillymc.libraryprojectmpp.data.local.DataAccessDao;
 import com.cesarwillymc.libraryprojectmpp.data.source.account.mapper.AddressMapper;
 import com.cesarwillymc.libraryprojectmpp.data.source.account.mapper.MemberMapper;
 import com.cesarwillymc.libraryprojectmpp.data.source.customer.mapper.BookCopyMapper;
-import com.cesarwillymc.libraryprojectmpp.data.source.customer.mapper.BookDataMapper;
 import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.mapper.MemberRecordMapper;
 
 public class MemberRecordFactoryDataSource {

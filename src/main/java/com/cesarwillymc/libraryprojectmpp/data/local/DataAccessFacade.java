@@ -1,13 +1,11 @@
 package com.cesarwillymc.libraryprojectmpp.data.local;
 
-import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.AddressResponse;
-import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.entity.MemberRecordResponse;
-import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
 import com.cesarwillymc.libraryprojectmpp.data.local.util.FileUtil;
 import com.cesarwillymc.libraryprojectmpp.data.source.account.entity.LibraryMemberResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.customer.entity.BookResponse;
 import com.cesarwillymc.libraryprojectmpp.data.source.login.entity.UserResponse;
-import com.cesarwillymc.libraryprojectmpp.domain.enums.TypeAuth;
+import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.entity.MemberRecordResponse;
+import com.cesarwillymc.libraryprojectmpp.domain.annotation.EntityData;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.User;
 import com.cesarwillymc.libraryprojectmpp.domain.exception.LibrarySystemException;
 import com.cesarwillymc.libraryprojectmpp.domain.exception.LoginException;
@@ -184,28 +182,5 @@ public class DataAccessFacade implements DataAccessDao {
 
     private HashMap<String, @EntityData MemberRecordResponse> readMemberRecord() {
         return FileUtil.readFromStorage(StorageType.RECORD_MEMBER);
-    }
-
-    public static void main(String[] args) {
-        var userMap = new HashMap<String, UserResponse>();
-        AddressResponse address1 = new AddressResponse("123 Main St", "New York", "NY", "10001");
-        UserResponse user1 = new UserResponse("John", "Doe", "555-555-5555", address1, "1234", "123", TypeAuth.ADMIN, "https://wallpapers.com/images/hd/cool-profile-picture-n8lf8k6jzs6ex36l.jpg");
-
-        AddressResponse address2 = new AddressResponse("456 Oak Ave", "Los Angeles", "CA", "90001");
-        UserResponse user2 = new UserResponse("Jane", "Smith", "555-444-3333", address2, "12345", "123", TypeAuth.EMPLOYEE, "https://wallpapers.com/images/hd/cool-profile-picture-ld8f4n1qemczkrig.jpg");
-
-        AddressResponse address3 = new AddressResponse("789 Elm St", "Chicago", "IL", "60601");
-        UserResponse user3 = new UserResponse("Bob", "Johnson", "555-333-2222", address3, "123456", "123", TypeAuth.BOTH, "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg");
-
-        userMap.put(user1.getId(), user1);
-        userMap.put(user2.getId(), user2);
-        userMap.put(user3.getId(), user3);
-        var booksMap = new HashMap<String, BookResponse>();
-        var membersMap = new HashMap<String, LibraryMemberResponse>();
-
-        System.out.println(new DataAccessFacade().readMemberMap().values().stream().toList());
-        //FileUtil.saveToStorage(StorageType.USERS, userMap);
-        FileUtil.saveToStorage(StorageType.BOOKS, booksMap);
-      //  FileUtil.saveToStorage(StorageType.MEMBERS, membersMap);
     }
 }

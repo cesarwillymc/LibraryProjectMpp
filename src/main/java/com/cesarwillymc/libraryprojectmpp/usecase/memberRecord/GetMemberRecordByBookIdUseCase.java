@@ -16,6 +16,6 @@ public class GetMemberRecordByBookIdUseCase extends UseCaseParams<String, Resour
 
     @Override
     public Resource<List<MemberRecord>> run(String id) {
-        return memberDataSource.getMembersRecordsByUserId(id);
+        return memberDataSource.getMembersRecordByBookId(id);
     }
 }

@@ -5,16 +5,11 @@ import com.cesarwillymc.libraryprojectmpp.domain.entities.Book;
 import com.cesarwillymc.libraryprojectmpp.ui.books.controller.BookController;
 import com.cesarwillymc.libraryprojectmpp.ui.books.view.BookCard;
 import com.cesarwillymc.libraryprojectmpp.ui.di.DIControllers;
-import com.cesarwillymc.libraryprojectmpp.ui.members.view.MemberCard;
 import com.cesarwillymc.libraryprojectmpp.ui.view.ButtonCard;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -23,13 +18,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.time.LocalDate;
 import java.util.function.Consumer;
 
 public class BookView implements View {
     private final Node node;
 
-    private BookController controller = DIControllers.createBookController();
+    private final BookController controller = DIControllers.createBookController();
 
     public BookView(Runnable navigateAddBook, Consumer<Book> navigateBookDetail) {
         // Create a BorderPane to hold all the components

@@ -4,10 +4,8 @@ import com.cesarwillymc.libraryprojectmpp.data.source.customer.entity.BookRespon
 import com.cesarwillymc.libraryprojectmpp.data.utils.mapper.Mapper;
 import com.cesarwillymc.libraryprojectmpp.domain.entities.Book;
 
-import java.util.Map;
-
 public class BookDataMapper extends Mapper<Book,BookResponse> {
-    BookCopyMapper mapper;
+    final BookCopyMapper mapper;
 
     public BookDataMapper(BookCopyMapper mapper) {
         this.mapper = mapper;
