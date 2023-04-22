@@ -7,9 +7,15 @@ import com.cesarwillymc.libraryprojectmpp.data.source.memberRecord.MemberRecordF
 import com.cesarwillymc.libraryprojectmpp.ui.home.controller.HomeController;
 import com.cesarwillymc.libraryprojectmpp.ui.login.controller.LoginController;
 import com.cesarwillymc.libraryprojectmpp.ui.login.controller.LoginControllerImpl;
+import com.cesarwillymc.libraryprojectmpp.ui.members.controller.AddMemberController;
+import com.cesarwillymc.libraryprojectmpp.ui.members.controller.DetailMemberController;
+import com.cesarwillymc.libraryprojectmpp.ui.members.controller.MemberController;
 import com.cesarwillymc.libraryprojectmpp.ui.profile.controller.ProfileController;
+import com.cesarwillymc.libraryprojectmpp.usecase.member.AddMemberUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.member.GetAllMembersUseCase;
+import com.cesarwillymc.libraryprojectmpp.usecase.member.GetMemberByIdUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.memberRecord.GetAllMembersRecordUseCase;
+import com.cesarwillymc.libraryprojectmpp.usecase.memberRecord.GetMemberRecordByUserIdUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.user.GetUserLoggedUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.user.SignInUseCase;
 import com.cesarwillymc.libraryprojectmpp.usecase.user.SignOutUseCase;
@@ -31,5 +37,24 @@ public class DIControllers {
         var useCase1= new GetUserLoggedUseCase(LoginFactoryDataSource.getLoginDataSource(dao));
         var useCase2= new SignOutUseCase(LoginFactoryDataSource.getLoginDataSource(dao));
         return new ProfileController(useCase1,useCase2);
+    }
+    public static MemberController createMemberController(){
+        var dao = new DataAccessFacade();
+        var useCase = new GetAllMembersUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
+
+        return new MemberController(useCase);
+    }
+    public static AddMemberController createAddMemberController(){
+        var dao = new DataAccessFacade();
+        var useCase = new AddMemberUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
+
+        return new AddMemberController(useCase);
+    }
+    public static DetailMemberController createDetailMemberController(){
+        var dao = new DataAccessFacade();
+        var useCase = new GetMemberByIdUseCase(MemberFactoryDataSource.getMemberDataSource(dao));
+        var useCase2 = new GetMemberRecordByUserIdUseCase(MemberRecordFactoryDataSource.getMemberRecordDataSource(dao));
+
+        return new DetailMemberController(useCase,useCase2);
     }
 }

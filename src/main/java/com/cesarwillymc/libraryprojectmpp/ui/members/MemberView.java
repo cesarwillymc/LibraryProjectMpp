@@ -1,6 +1,8 @@
 package com.cesarwillymc.libraryprojectmpp.ui.members;
 
 import com.almasb.fxgl.core.View;
+import com.cesarwillymc.libraryprojectmpp.ui.di.DIControllers;
+import com.cesarwillymc.libraryprojectmpp.ui.members.controller.MemberController;
 import com.cesarwillymc.libraryprojectmpp.ui.view.ButtonCard;
 import com.cesarwillymc.libraryprojectmpp.ui.members.view.MemberCard;
 import javafx.collections.FXCollections;
@@ -19,9 +21,15 @@ import java.util.function.Consumer;
 
 public class MemberView implements View {
     private final Node node;
+    private MemberController memberController = DIControllers.createMemberController();
 
     public MemberView(Runnable navigateAddMember, Consumer<String> navigateDetailMember) {
+        ListView<MemberCard> cardList = new ListView<>(FXCollections.observableArrayList());
 
+        memberController.getInitialListMembers((x) -> {
+            cardList.setItems(FXCollections.observableArrayList(x));
+            cardList.refresh();
+        });
         // Create a BorderPane to hold all the components
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(10));
@@ -33,12 +41,25 @@ public class MemberView implements View {
 
         // Create the search TextField and Button
         TextField searchField = new TextField();
-        searchField.setPromptText("Search by ISBN");
+        searchField.setPromptText("Search by id");
 
         Button searchButton = new Button("Search");
-        Button addNewMemberButton = new Button("Add New Book");
+        Button reload = new Button("Reload List");
+        reload.setOnAction(event -> {
+            memberController.getInitialListMembers((x) -> {
+                cardList.setItems(FXCollections.observableArrayList(x));
+                cardList.refresh();
+            });
+        });
+        Button addNewMemberButton = new Button("Add New Member Library");
+        searchButton.setOnAction(event -> {
+            memberController.searchInList(searchField.getText(), (x) -> {
+                cardList.setItems(FXCollections.observableArrayList(x));
+                cardList.refresh();
+            });
+        });
         addNewMemberButton.setOnAction(event -> navigateAddMember.run());
-        HBox searchControls = new HBox(searchField, searchButton, addNewMemberButton);
+        HBox searchControls = new HBox(searchField, searchButton, reload, addNewMemberButton);
         searchControls.setAlignment(Pos.CENTER_LEFT);
         searchControls.setSpacing(10);
         searchBox.getChildren().add(searchControls);
@@ -48,33 +69,46 @@ public class MemberView implements View {
         filterBox.setSpacing(10);
         searchBox.getChildren().add(filterBox);
 
-        ButtonCard filter1 = new ButtonCard("Title");
-        ButtonCard filter2 = new ButtonCard("Date created");
-        ButtonCard filter3 = new ButtonCard("Date updated");
-        ButtonCard clearFilter = new ButtonCard("Clear filters");
+        ButtonCard filter1 = new ButtonCard("Name",(b)->{
+            memberController.filterByName(b, (x) -> {
+                cardList.setItems(FXCollections.observableArrayList(x));
+                cardList.refresh();
+            });
+        });
+        ButtonCard filter2 = new ButtonCard("Id",(b)->{
+            memberController.filterById(b, (x) -> {
+                cardList.setItems(FXCollections.observableArrayList(x));
+                cardList.refresh();
+            });
+        });
+        ButtonCard filter3 = new ButtonCard("Telephone",(b)->{
+            memberController.filterByTelephone(b, (x) -> {
+                cardList.setItems(FXCollections.observableArrayList(x));
+                cardList.refresh();
+            });
+        });
+        Button clearFilter = new Button("Clear filters");
+
         clearFilter.setOnAction(event -> {
-
+            memberController.cleanFilter((x) -> {
+                cardList.setItems(FXCollections.observableArrayList(x));
+                cardList.refresh();
+            });
         });
-        filter3.setOnAction(event -> {
 
-        });
-        filter3.setOnAction(event -> {
-
-        });
-        filter3.setOnAction(event -> {
-
-        });
         filterBox.getChildren().addAll(new Label("Filters: "), filter1, filter2, filter3, clearFilter);
         filterBox.setPadding(new Insets(10));
         // Create the ListView of cards
-        ListView<MemberCard> cardList = new ListView<>(FXCollections.observableArrayList(new MemberCard("hola", "cesar", "123123123", "213123"), new MemberCard("hola", "cesar", "123123123", "213123")));
         cardList.setPrefSize(400, 400);
         cardList.setPadding(new Insets(20));
-        cardList.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.intValue() >= 0) {
-                navigateDetailMember.accept(cardList.getItems().get(newValue.intValue()).getMemberId());
+        cardList.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) { // double-click
+                MemberCard selectedItem = cardList.getSelectionModel().getSelectedItem();
+                navigateDetailMember.accept(selectedItem.getMemberId());
+                cardList.getSelectionModel().clearSelection();
             }
         });
+
 
         root.setCenter(cardList);
 

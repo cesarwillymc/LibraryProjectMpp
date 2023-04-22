@@ -1,21 +1,27 @@
 package com.cesarwillymc.libraryprojectmpp.ui.members;
 
 import com.cesarwillymc.libraryprojectmpp.domain.entities.MemberRecord;
+import com.cesarwillymc.libraryprojectmpp.ui.di.DIControllers;
+import com.cesarwillymc.libraryprojectmpp.ui.members.controller.DetailMemberController;
+import com.cesarwillymc.libraryprojectmpp.ui.view.DialogError;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+
 import java.time.LocalDate;
 
-public class DetailMemberScreen extends VBox {
+public class DetailMemberScreen extends Stage {
+    public static DetailMemberScreen INSTANCE = new DetailMemberScreen();
 
     private final Label firstNameLabel = new Label("First Name:");
     private final Label lastNameLabel = new Label("Last Name:");
@@ -26,18 +32,46 @@ public class DetailMemberScreen extends VBox {
     private final Label lastNameValue = new Label();
     private final Label telephoneValue = new Label();
     private final Label addressValue = new Label();
+    private VBox box;
+    private TableView<MemberRecord> tableView = new TableView<>();
+    Stage previusStage;
 
-    private final TableView<MemberRecord> tableView = new TableView<>();
+    DetailMemberController controller = DIControllers.createDetailMemberController();
 
-    public DetailMemberScreen() {
+    DetailMemberScreen() {
+
+    }
+
+    public void setStage(Stage previusStage, String id) {
+        this.previusStage = previusStage;
+        box = new VBox();
+
+        controller.getUserById(id).apply(s -> {
+            firstNameValue.setText(s.getFirstName());
+            lastNameValue.setText(s.getLastName());
+            telephoneValue.setText(s.getTelephone());
+            addressValue.setText(s.getAddress().toString());
+        }, e -> new DialogError("Error", "Loading user " + id));
+        Button backButton = new Button("Return");
+        backButton.setPadding(new Insets(10));
+        backButton.setOnAction(event -> {
+            tableView = new TableView<>();
+            close();
+            previusStage.show();
+
+        });
         Image defaultPhoto = new Image("https://via.placeholder.com/150");
 
         // Set up labels
         HBox firstNameBox = new HBox(5, firstNameLabel, firstNameValue);
+        firstNameBox.setPadding(new Insets(10));
         HBox lastNameBox = new HBox(5, lastNameLabel, lastNameValue);
+        lastNameBox.setPadding(new Insets(10));
         HBox telephoneBox = new HBox(5, telephoneLabel, telephoneValue);
+        telephoneBox.setPadding(new Insets(10));
         HBox addressBox = new HBox(5, addressLabel, addressValue);
-        getChildren().addAll(new ImageView(defaultPhoto),firstNameBox, lastNameBox, telephoneBox, addressBox);
+        addressBox.setPadding(new Insets(10));
+        box.getChildren().addAll(backButton, new ImageView(defaultPhoto), firstNameBox, lastNameBox, telephoneBox, addressBox);
 
         // Set up table columns
         TableColumn<MemberRecord, String> idColumn = new TableColumn<>("ID");
@@ -78,7 +112,17 @@ public class DetailMemberScreen extends VBox {
         });
 
         tableView.getColumns().addAll(idColumn, bookColumn, borrowColumn, dueColumn, returnedColumn);
-        getChildren().add(tableView);
+        box.getChildren().add(tableView);
+        Scene scene = new Scene(box, 800, 600);
+        setScene(scene);
+        show();
+
+        controller.getRecordMembers(id).apply(s -> {
+            setMemberRecords(FXCollections.observableList(s));
+        }, e -> {
+
+        });
+
     }
 
     public void setFirstName(String firstName) {
@@ -100,5 +144,6 @@ public class DetailMemberScreen extends VBox {
     public void setMemberRecords(ObservableList<MemberRecord> memberRecords) {
         tableView.setItems(memberRecords);
     }
+
 
 }

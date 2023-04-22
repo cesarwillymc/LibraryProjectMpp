@@ -4,6 +4,8 @@ import com.cesarwillymc.libraryprojectmpp.ui.books.BookView;
 import com.cesarwillymc.libraryprojectmpp.ui.home.DashboardView;
 import com.cesarwillymc.libraryprojectmpp.ui.home.view.Menu;
 import com.cesarwillymc.libraryprojectmpp.ui.login.LoginScreen;
+import com.cesarwillymc.libraryprojectmpp.ui.members.AddMemberScreen;
+import com.cesarwillymc.libraryprojectmpp.ui.members.DetailMemberScreen;
 import com.cesarwillymc.libraryprojectmpp.ui.members.MemberView;
 import com.cesarwillymc.libraryprojectmpp.ui.profile.ProfileView;
 import javafx.scene.Parent;
@@ -29,9 +31,15 @@ public class HomeScreen extends Stage {
 
         });
         memberView = new MemberView(()->{
-
+            var addMemberScreen = AddMemberScreen.INSTANCE;
+            hide();
+            addMemberScreen.setStage(this);
+            addMemberScreen.show();
         }, (S)->{
-
+            var detailMember = DetailMemberScreen.INSTANCE;
+            hide();
+            detailMember.setStage(this,S);
+            detailMember.show();
         });
         profileView = new ProfileView(()->{
             close();

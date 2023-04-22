@@ -34,7 +34,9 @@ public class Resource<T> {
         if (exception.isPresent()) {
             fail.accept(exception.get());
         } else {
-            consumer.accept((T) data.get());
+            if(data.isEmpty())
+                consumer.accept(null);
+            else consumer.accept((T) data.get());
         }
     }
     public boolean isSuccess(){

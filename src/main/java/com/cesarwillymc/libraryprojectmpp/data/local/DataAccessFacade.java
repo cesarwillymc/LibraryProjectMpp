@@ -88,7 +88,7 @@ public class DataAccessFacade implements DataAccessDao {
             throw new LibrarySystemException("Member already exist");
         }
         memberMap.put(memberResponse.getMemberId(), memberResponse);
-        FileUtil.saveToStorage(StorageType.BOOKS, memberMap);
+        FileUtil.saveToStorage(StorageType.MEMBERS, memberMap);
     }
 
     @Override

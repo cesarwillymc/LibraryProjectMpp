@@ -6,19 +6,20 @@ import javafx.scene.control.ButtonType;
 
 import java.util.Optional;
 
-public class DialogError {
-    public DialogError(String title, String subTitle){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+public class DialogSuccess {
+    public DialogSuccess(String title, String subTitle, Runnable runnable) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(subTitle);
 
-        ButtonType closeButton = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType closeButton = new ButtonType("Okey", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(closeButton);
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == closeButton) {
-           alert.close();
+            runnable.run();
+            alert.close();
         }
     }
 }

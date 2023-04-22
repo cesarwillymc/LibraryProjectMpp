@@ -38,10 +38,10 @@ public class BookView implements View {
 
         // Create the search TextField and Button
         TextField searchField = new TextField();
-        searchField.setPromptText("Search by Id");
+        searchField.setPromptText("Search by ISBN");
 
         Button searchButton = new Button("Search");
-        Button addNewMemberButton = new Button("Add New Member");
+        Button addNewMemberButton = new Button("Add New Book");
         addNewMemberButton.setOnAction(event -> navigateAddBook.run());
         HBox searchControls = new HBox(searchField, searchButton, addNewMemberButton);
         searchControls.setAlignment(Pos.CENTER_LEFT);
@@ -53,20 +53,17 @@ public class BookView implements View {
         filterBox.setSpacing(10);
         searchBox.getChildren().add(filterBox);
 
-        ButtonCard filter1 = new ButtonCard("Name");
-        ButtonCard filter2 = new ButtonCard("Id");
-        ButtonCard filter3 = new ButtonCard("Telephone");
-        ButtonCard clearFilter = new ButtonCard("Clear filters");
+        ButtonCard filter1 = new ButtonCard("Title",(b)->{
+
+        });
+        ButtonCard filter2 = new ButtonCard("Date created",(b)->{
+
+        });
+        ButtonCard filter3 = new ButtonCard("Date updated",(b)->{
+
+        });
+        Button clearFilter = new Button("Clear filters");
         clearFilter.setOnAction(event -> {
-
-        });
-        filter3.setOnAction(event -> {
-
-        });
-        filter3.setOnAction(event -> {
-
-        });
-        filter3.setOnAction(event -> {
 
         });
         filterBox.getChildren().addAll(new Label("Filters: "), filter1, filter2, filter3, clearFilter);
