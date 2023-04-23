@@ -41,7 +41,7 @@ public class MemberView implements View {
 
         // Create the search TextField and Button
         TextField searchField = new TextField();
-        searchField.setPromptText("Search by id");
+        searchField.setPromptText("Search by id or name");
 
         Button searchButton = new Button("Search");
         Button reload = new Button("Reload List");
@@ -90,7 +90,7 @@ public class MemberView implements View {
         cardList.setPrefSize(400, 400);
         cardList.setPadding(new Insets(20));
         cardList.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) { // double-click
+            if (event.getClickCount() == 2) { // double-click
                 MemberCard selectedItem = cardList.getSelectionModel().getSelectedItem();
                 navigateDetailMember.accept(selectedItem.getMemberId());
                 cardList.getSelectionModel().clearSelection();

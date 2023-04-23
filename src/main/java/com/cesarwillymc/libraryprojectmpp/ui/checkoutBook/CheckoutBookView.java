@@ -60,9 +60,11 @@ public class CheckoutBookView implements View {
         searchBookButton.setOnAction(event -> {
             if (isbnField.getText().isBlank()) {
                 hBoxCardBook.getChildren().clear();
+                controller.setBook(null);
             }
             controller.searchBookById(isbnField.getText()).apply(this::createCardBook, e -> {
                 hBoxCardBook.getChildren().clear();
+                controller.setBook(null);
                 new DialogError("No found", "Book cannot be found, check the ISBN");
             });
         });
@@ -80,12 +82,15 @@ public class CheckoutBookView implements View {
         saveCheckoutButton.setOnAction(event -> {
             if (controller.getBook() == null) {
                 new DialogError("Validation Fail", "Add a book");
+                return;
             }
             if (controller.getLibraryMember() == null) {
                 new DialogError("Validation Fail", "Add a library member");
+                return;
             }
             if (!controller.getBook().isAvailable()) {
                 new DialogError("Validation Fail", "Doesn't have copies");
+                return;
             }
             controller.saveMemberCheckout().apply(s -> {
                 openDialogSuccess();
@@ -109,6 +114,7 @@ public class CheckoutBookView implements View {
     }
 
     void createCardUser(LibraryMember user) {
+        hBoxCardUser.getChildren().clear();
         controller.setLibraryMember(user);
         var buttonRemoveCard = new Button("Remove");
         buttonRemoveCard.setOnAction(event -> {
@@ -123,6 +129,7 @@ public class CheckoutBookView implements View {
 
 
     void createCardBook(Book book) {
+        hBoxCardBook.getChildren().clear();
         controller.setBook(book);
         var buttonRemoveCard = new Button("Remove");
         buttonRemoveCard.setOnAction(event -> {

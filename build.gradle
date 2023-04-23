@@ -26,7 +26,7 @@ tasks.withType(JavaCompile).configureEach {
 
 application {
     mainModule = 'com.cesarwillymc.libraryprojectmpp'
-    mainClass = 'com.cesarwillymc.libraryprojectmpp.HelloApplication'
+    mainClass = 'com.cesarwillymc.libraryprojectmpp.App'
 }
 
 javafx {

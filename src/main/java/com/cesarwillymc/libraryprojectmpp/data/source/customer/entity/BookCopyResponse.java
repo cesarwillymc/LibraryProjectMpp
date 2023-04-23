@@ -17,4 +17,14 @@ public record BookCopyResponse(
 ) implements Serializable {
     @Serial
     private static final long serialVersionUID = 1113799434518616191L;
+
+    @Override
+    public String toString() {
+        return "BookCopyResponse{" +
+                "isbn='" + isbn + '\'' +
+                ", name='" + name + '\'' +
+                ", copyNum=" + copyNum +
+                ", isAvailable=" + isAvailable +
+                '}';
+    }
 }

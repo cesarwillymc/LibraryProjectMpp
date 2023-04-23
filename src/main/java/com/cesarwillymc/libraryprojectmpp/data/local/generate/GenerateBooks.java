@@ -107,6 +107,13 @@ public class GenerateBooks {
         for (BookResponse book : books){
             data.put(book.isbn(),book);
         }
-        FileUtil.saveToStorage(StorageType.BOOKS, data);
+       //FileUtil.saveToStorage(StorageType.BOOKS, data);
+
+
+        HashMap<String, BookResponse> dataRead =FileUtil.readFromStorage(StorageType.BOOKS);
+        dataRead.values().stream().forEach(
+                System.out::println
+        );
+
     }
 }

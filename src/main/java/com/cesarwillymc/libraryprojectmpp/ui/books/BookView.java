@@ -90,7 +90,7 @@ public class BookView implements View {
         cardList.setPrefSize(400, 400);
         cardList.setPadding(new Insets(20));
         cardList.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) { // double-click
+            if (event.getClickCount() == 2) { // double-click
                 var selectedItem = cardList.getSelectionModel().getSelectedItem();
                 navigateBookDetail.accept(selectedItem.getBook());
                 cardList.getSelectionModel().clearSelection();

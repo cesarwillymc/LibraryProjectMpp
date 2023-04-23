@@ -7,6 +7,7 @@ import com.cesarwillymc.libraryprojectmpp.usecase.member.GetAllMembersUseCase;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -50,13 +51,14 @@ public class MemberController {
                 Comparator.comparing(LibraryMember::getTelephone).reversed() :
                 Comparator.comparing(LibraryMember::getTelephone)
         ).map(this::from).collect(Collectors.toList());
-        System.out.println("IsRever telephone " +isReverse);
+        System.out.println("IsRever telephone " + isReverse);
         data.accept(list);
     }
 
     public void searchInList(String word, Consumer<List<MemberCard>> data) {
         var list = members.stream().filter(x ->
-                x.getFirstName().contains(word) || x.getLastName().contains(word)
+                x.getFirstName().toLowerCase(Locale.ROOT).contains(word.toLowerCase(Locale.ROOT)) ||
+                        x.getLastName().toLowerCase(Locale.ROOT).contains(word.toLowerCase(Locale.ROOT))
         ).map(this::from).collect(Collectors.toList());
         data.accept(list);
     }
@@ -65,8 +67,8 @@ public class MemberController {
         data.accept(members.stream().map(this::from).collect(Collectors.toList()));
     }
 
-    private MemberCard from(LibraryMember member){
-        return new  MemberCard(
+    private MemberCard from(LibraryMember member) {
+        return new MemberCard(
                 member.getFirstName(),
                 member.getLastName(),
                 member.getTelephone(),

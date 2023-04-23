@@ -7,6 +7,7 @@ import com.cesarwillymc.libraryprojectmpp.usecase.book.GetAllBooksUseCase;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,6 @@ public class BookController {
 
     public BookController(GetAllBooksUseCase allBooksUseCase) {
         this.allBooksUseCase = allBooksUseCase;
-
     }
 
     public void getInitialListMembers(Consumer<List<BookCard>> data) {
@@ -55,7 +55,7 @@ public class BookController {
 
     public void searchInList(String word, Consumer<List<BookCard>> data) {
         var list = books.stream().filter(x ->
-                x.getIsbn().contains(word) || x.getTitle().contains(word)
+                x.getIsbn().toLowerCase(Locale.ROOT).contains(word.toLowerCase(Locale.ROOT)) || x.getTitle().toLowerCase(Locale.ROOT).contains(word.toLowerCase(Locale.ROOT))
         ).map(this::from).collect(Collectors.toList());
         data.accept(list);
     }

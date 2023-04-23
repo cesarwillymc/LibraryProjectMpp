@@ -206,7 +206,6 @@ public class BookDetailScreen extends Stage {
             @Override
             protected void updateItem(Color item, boolean empty) {
                 super.updateItem(item, empty);
-
                 if (empty || item == null) {
                     setText(null);
                     setGraphic(null);
@@ -223,7 +222,7 @@ public class BookDetailScreen extends Stage {
 
     void changeStateDelivered(ParamsTable paramsTable) {
         controller.updateMemberRecord(paramsTable.getIdCheckOut()).apply(x -> {
-            numOfCopiesLabelAvailable.setText("Number of Copies Available: " + book.getTotalBookAvailable() + 1);
+            numOfCopiesLabelAvailable.setText("Number of Copies Available: " + (book.getTotalBookAvailable() + 1));
             onLoadTable();
         }, e -> {
             new DialogError("Error", e.getMessage());
