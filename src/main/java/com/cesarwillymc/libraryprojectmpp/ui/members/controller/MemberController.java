@@ -51,7 +51,6 @@ public class MemberController {
                 Comparator.comparing(LibraryMember::getTelephone).reversed() :
                 Comparator.comparing(LibraryMember::getTelephone)
         ).map(this::from).collect(Collectors.toList());
-        System.out.println("IsRever telephone " + isReverse);
         data.accept(list);
     }
 

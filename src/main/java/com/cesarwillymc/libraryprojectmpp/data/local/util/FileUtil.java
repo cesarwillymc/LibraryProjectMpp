@@ -18,6 +18,7 @@ public class FileUtil {
             .add("src").add("main").add("java").add("com").add("cesarwillymc").add("libraryprojectmpp").add("data").add("local").add("storage").toString();
     public static final String OUTPUT_DIR_PROJECT = System.getProperty("user.dir") + pathProject;
 
+    @SuppressWarnings("All")
     public static <T extends HashMap<?,?>> T readFromStorage(StorageType type) {
         try (var in = new ObjectInputStream(Files.newInputStream(FileSystems.getDefault().getPath(OUTPUT_DIR_PROJECT, type.toString())))) {
             return (T) in.readObject();

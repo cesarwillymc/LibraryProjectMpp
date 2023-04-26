@@ -29,3 +29,5 @@ gradle
 *.lock
 .gradle/7.6/checksums/checksums.lock
 *.xml
+*.lock
+.gradle/7.6/checksums/checksums.lock

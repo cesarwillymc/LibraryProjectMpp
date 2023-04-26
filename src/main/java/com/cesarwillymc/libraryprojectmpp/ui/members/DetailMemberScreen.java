@@ -89,7 +89,6 @@ public class DetailMemberScreen extends Stage {
 
     private void onLoadTable() {
         controller.getRecordMembers(id).apply(s -> {
-
             var listMapper = s.stream().map(x -> new LibraryMemberUI(
                     x.getBook().getCopyNum(),
                     x.getBook().getName(),

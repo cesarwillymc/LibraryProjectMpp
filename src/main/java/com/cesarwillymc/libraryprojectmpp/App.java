@@ -20,7 +20,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         this.primaryStage = stage;
         // Load splash screen image
-        Image splashImage = new Image("https://www.pngitem.com/pimgs/m/19-194725_icon-of-a-stack-of-colorful-books-with.png");
+        Image splashImage = new Image("https://www.pngitem.com/pimgs/m/19-194725_icon-of-a-stack-of-colorful-books-with.png", 500,350,true,false);
         ImageView splashImageView = new ImageView(splashImage);
 
         // Add fade transition to splash screen image
