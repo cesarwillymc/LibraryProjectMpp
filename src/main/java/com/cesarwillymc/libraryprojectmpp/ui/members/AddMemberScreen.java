@@ -47,6 +47,7 @@ public class AddMemberScreen extends Stage {
 
         // Create text fields
         documentField = new TextField();
+        documentField.setPromptText("Put your Id Number like Number of Passport, driver licence Id.....");
         firstNameField = new TextField();
         lastNameField = new TextField();
         telephoneField = new TextField();
@@ -61,7 +62,7 @@ public class AddMemberScreen extends Stage {
             close();
             previusStage.show();
         });
-        Button saveButton = new Button("Save Library");
+        Button saveButton = new Button("Save");
         saveButton.setPadding(new Insets(10));
         saveButton.setOnAction(event -> {
             if (isValidationFields()) {

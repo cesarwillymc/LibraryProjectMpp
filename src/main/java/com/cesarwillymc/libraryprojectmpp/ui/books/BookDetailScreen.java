@@ -154,9 +154,9 @@ public class BookDetailScreen extends Stage {
     TableView<LibraryMemberUI> createTableView() {
         TableView<LibraryMemberUI> table = new TableView<>();
 
-        TableColumn<LibraryMemberUI, Integer> idCopyBook = new TableColumn<>("Id book");
+        TableColumn<LibraryMemberUI, Integer> idCopyBook = new TableColumn<>("Id copy book");
         idCopyBook.setCellValueFactory(new PropertyValueFactory<>("idCopyBook"));
-        TableColumn<LibraryMemberUI, String> titleCol = new TableColumn<>("Usuario");
+        TableColumn<LibraryMemberUI, String> titleCol = new TableColumn<>("User");
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         TableColumn<LibraryMemberUI, String> isbnCol = new TableColumn<>("ISBN");
@@ -189,7 +189,7 @@ public class BookDetailScreen extends Stage {
                     setGraphic(null);
                 } else {
                     if (item.getTypeStatusReturnBook() != TypeStatusReturnBook.FINISH) {
-                        Button button = new Button("Delivered");
+                        Button button = new Button("Returned");
                         button.setOnAction(event -> {
                             changeStateDelivered(item);
                         });

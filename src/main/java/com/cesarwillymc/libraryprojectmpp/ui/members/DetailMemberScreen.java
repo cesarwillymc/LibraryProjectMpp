@@ -110,7 +110,7 @@ public class DetailMemberScreen extends Stage {
     TableView<LibraryMemberUI> createTableView() {
         TableView<LibraryMemberUI> table = new TableView<>();
 
-        TableColumn<LibraryMemberUI, Integer> idCopyBook = new TableColumn<>("Id book");
+        TableColumn<LibraryMemberUI, Integer> idCopyBook = new TableColumn<>("Id copy book");
         idCopyBook.setCellValueFactory(new PropertyValueFactory<>("idCopyBook"));
         TableColumn<LibraryMemberUI, String> titleCol = new TableColumn<>("Title");
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -145,7 +145,7 @@ public class DetailMemberScreen extends Stage {
                     setGraphic(null);
                 } else {
                     if (item.getTypeStatusReturnBook() != TypeStatusReturnBook.FINISH) {
-                        Button button = new Button("Delivered");
+                        Button button = new Button("Returned");
                         button.setOnAction(event -> {
                             changeStateDelivered(item);
                         });

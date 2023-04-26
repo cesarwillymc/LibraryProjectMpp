@@ -39,8 +39,8 @@ public class HomeController {
         int bookInProcess = (int) memberRecord.getData().stream().filter(x -> x.getStatusReturnBook() == TypeStatusReturnBook.PROCESS).count();
 
         return FXCollections.observableArrayList(
-                new PieChart.Data("Undelivered books", bookOutTime),
-                new PieChart.Data("Books delivered", bookReturned),
+                new PieChart.Data("Unreturned books", bookOutTime),
+                new PieChart.Data("Books returned", bookReturned),
                 new PieChart.Data("Borrowed books", bookInProcess)
         );
     }
