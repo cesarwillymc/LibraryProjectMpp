@@ -1,0 +1,18 @@
+The desktop application should have a database
+that stores information about all books, members,
+and daily transaction records in our library.
+This information should be easily searchable,
+allowing the manager to find books based on ISBN
+and book title, and have a filters by attributes
+such as title, date created, and date updated.
+The application should enable students and
+faculty members to reserve and checkout books,
+while also keeping track of the status of each book,
+such as whether it is currently checked out or available.
+Library staff should be able to add new books,
+remove books, and update information about
+existing books using the application.
+The application should also provide
+to the library staff  go through the information ,
+borrow dates, overdue books, and return dates,
+regarding the current status of a book copy.
